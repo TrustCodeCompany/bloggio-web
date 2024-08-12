@@ -77,6 +77,7 @@ export const MyProfile = () => {
               />
         }
         <h2 className='text-xl font-semibold mt-4'>{userName}</h2>
+        <p>{userShortBio ?? userShortBio}</p>
         <button
           onClick={handleEditProfileClick}
           className='mt-2 text-blue-500 hover:underline'

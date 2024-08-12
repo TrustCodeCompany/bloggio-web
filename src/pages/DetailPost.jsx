@@ -19,7 +19,7 @@ export const DetailPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`https://bloggio-api-ziu0.onrender.comPost/${id}`)
+        const response = await fetch(`https://bloggio-api-ziu0.onrender.com/Post/${id}`)
         const data = await response.json()
         console.log(data)
         setPost(data)
