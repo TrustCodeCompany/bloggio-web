@@ -17,7 +17,7 @@ export const MyProfileCard = ({ image, title, description, date, postId, onDelet
   const handleDeleteConfirm = async () => {
     // llamo al modal de confirmación de eliminación
     ShowConfirmationDeleteAlert(
-      `https://bloggio-api-5hut.onrender.com/Post/${postId}`,
+      `https://bloggio-api-ziu0.onrender.com/Post/${postId}`,
       onDelete,
       setDropdownVisible
     )
