@@ -7,19 +7,20 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
   const [comments, setComments] = useState([])
   const [newComment, setNewComment] = useState('')
 
-  const { id } = useUserStore()
+  const { id, userName } = useUserStore()
+  console.log(userName)
+
+  const fetchComments = async () => {
+    try {
+      const response = await fetch(`https://bloggio-api-ziu0.onrender.com/Comment?postId=${postId}`)
+      const data = await response.json()
+      setComments(data)
+    } catch (error) {
+      console.error('Error fetching comments:', error)
+    }
+  }
 
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const response = await fetch(`https://bloggio-api-ziu0.onrender.com/Comment?postId=${postId}`)
-        const data = await response.json()
-        setComments(data)
-      } catch (error) {
-        console.error('Error fetching comments:', error)
-      }
-    }
-
     fetchComments()
   }, [postId])
 
@@ -44,9 +45,14 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
         },
         body: JSON.stringify(dataFormatted)
       })
-      const data = await response.json()
-      setComments((prevComments) => [...prevComments, data])
-      setNewComment('')
+
+      if (response.ok) {
+        setNewComment('')
+        // Espera a que el comentario sea creado y luego vuelve a obtener todos los comentarios
+        fetchComments()
+      } else {
+        console.error('Error al publicar el comentario:', response.statusText)
+      }
     } catch (error) {
       console.error('Error posting comment:', error)
     }
