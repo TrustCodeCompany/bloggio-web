@@ -6,11 +6,12 @@ export const SearchCategories = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [posts, setPosts] = useState([])
   const [showFiltersModal, setShowFiltersModal] = useState(false)
-  console.log(posts)
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   useEffect(() => {
     const fetchPosts = async () => {
-      if (searchTerm.trim() === '') {
+      if (searchTerm.trim() === '' && !startDate && !endDate) {
         setPosts([])
         return
       }
@@ -23,8 +24,8 @@ export const SearchCategories = () => {
           },
           body: JSON.stringify({
             categoryName: '',
-            date_end: '',
-            date_start: '',
+            date_end: endDate,
+            date_start: startDate,
             limit: 20,
             offset: 1,
             postTitle: searchTerm
@@ -37,33 +38,33 @@ export const SearchCategories = () => {
         }
 
         const data = await response.json()
-        console.log('Data received from API:', data) // Verifica la estructura de la respuesta
-        setPosts(data.data) // Ajusta esto según la estructura de la respuesta de tu API
+        console.log('Data received from API:', data)
+        setPosts(data.data)
       } catch (error) {
         console.error('Error fetching posts:', error)
       }
     }
 
     fetchPosts()
-  }, [searchTerm])
+  }, [searchTerm, startDate, endDate])
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value)
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Lógica adicional si decides tener un botón de búsqueda
   }
 
   const handleOpenFiltersModal = () => {
     setShowFiltersModal(true)
   }
 
+  const handleApplyFilters = (start, end) => {
+    setStartDate(start)
+    setEndDate(end)
+  }
+
   return (
     <div className='flex flex-col w-full mb-6'>
       <section className='w-full mb-4'>
-        <form onSubmit={handleSubmit} className='w-full flex justify-between'>
+        <form onSubmit={(e) => e.preventDefault()} className='w-full flex justify-between'>
           <input
             type='text'
             name='searchCategories'
@@ -84,7 +85,10 @@ export const SearchCategories = () => {
 
       {/* Ventana modal de filtros */}
       {showFiltersModal && (
-        ModalFindCategoriesByDate(setShowFiltersModal)
+        <ModalFindCategoriesByDate
+          setShowFiltersModal={setShowFiltersModal}
+          onApplyFilters={handleApplyFilters}
+        />
       )}
 
       {/* Mostrar resultados de búsqueda */}
@@ -99,7 +103,6 @@ export const SearchCategories = () => {
               </div>
             )
           )}
-
     </div>
   )
 }
