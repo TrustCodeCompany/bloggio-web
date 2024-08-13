@@ -12,7 +12,7 @@ export const MyProfileEditModal = ({ userData, id }) => {
   const [imageFile, setImageFile] = useState(null) // Estado para la imagen
 
   // endpoint para obtener los datos del usuario
-  const urlUpdateProfile = 'https://bloggio-api-ziu0.onrender.com/auth/update-profile'
+  const urlUpdateProfile = 'https://bloggio-api-zc58.onrender.com/auth/update-profile'
 
   const handleCloseModal = () => {
     setModalOpen(false)

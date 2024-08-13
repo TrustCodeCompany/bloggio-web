@@ -17,7 +17,7 @@ export const SearchCategories = () => {
       }
 
       try {
-        const response = await fetch('https://bloggio-api-ziu0.onrender.com/Post/find-all-by-filters', {
+        const response = await fetch('https://bloggio-api-zc58.onrender.com/Post/find-all-by-filters', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

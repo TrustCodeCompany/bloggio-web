@@ -14,7 +14,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
 
   const fetchComments = useCallback(async () => {
     try {
-      const response = await fetch(`https://bloggio-api-ziu0.onrender.com/Comment?postId=${postId}`)
+      const response = await fetch(`https://bloggio-api-zc58.onrender.com/Comment?postId=${postId}`)
       const data = await response.json()
       setComments(data)
     } catch (error) {
@@ -40,7 +40,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
     }
 
     try {
-      const response = await fetch('https://bloggio-api-ziu0.onrender.com/Comment/Create', {
+      const response = await fetch('https://bloggio-api-zc58.onrender.com/Comment/Create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
     }
 
     try {
-      const response = await fetch('https://bloggio-api-ziu0.onrender.com/Comment/Create', {
+      const response = await fetch('https://bloggio-api-zc58.onrender.com/Comment/Create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
