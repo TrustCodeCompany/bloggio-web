@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import userAvatar from '../../assets/images/user-male-avatar.png'
 import { useUserStore } from '../../store/userStore.js'
 
@@ -10,7 +10,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
   const { id, userName } = useUserStore()
   console.log(userName)
 
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     try {
       const response = await fetch(`https://bloggio-api-ziu0.onrender.com/Comment?postId=${postId}`)
       const data = await response.json()
@@ -18,11 +18,11 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
     } catch (error) {
       console.error('Error fetching comments:', error)
     }
-  }
+  }, [postId])
 
   useEffect(() => {
     fetchComments()
-  }, [postId])
+  }, [fetchComments])
 
   const handleCommentSubmit = async () => {
     const dataFormatted = {
