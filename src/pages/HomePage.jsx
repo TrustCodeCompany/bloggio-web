@@ -14,7 +14,7 @@ export const HomePage = () => {
 
       <hr className='bg-gray-600 m-auto mt-6 mb-6 lg:mt-10 lg:mb-10' />
 
-      <section className='mt-10 mb-12 lg:mb-14 md:flex md:justify-between'>
+      {/* <section className='mt-10 mb-12 lg:mb-14 md:flex md:justify-between'>
         <div className='text-center mb-6 md:text-start md:w-1/2'>
           <h2 className='text-xl font-bold lg:mb-2'>
             Suscríbete a nuestro boletin
@@ -33,7 +33,7 @@ export const HomePage = () => {
             Suscribirse
           </button>
         </div>
-      </section>
+      </section> */}
 
     </>
   )

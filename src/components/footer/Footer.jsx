@@ -15,19 +15,19 @@ export const Footer = () => {
             <ul className=''>
               <li className='text-slate-400'>Empresa</li>
               <li>Nosotros</li>
-              <li>Noticias</li>
+              {/* <li>Noticias</li> */}
               <li>Contacto</li>
             </ul>
 
-            <ul>
+            {/* <ul>
               <li className='text-slate-400'>Recursos</li>
               <li>Blog</li>
               <li>Boletin</li>
               <li>Publicidad</li>
               <li>Soporte</li>
-            </ul>
+            </ul> */}
           </div>
-          <div className='flex justify-around mb-10 md:w-1/2'>
+          {/* <div className='flex justify-around mb-10 md:w-1/2'>
             <ul className=''>
               <li className='text-slate-400'>Redes Sociales</li>
               <li>Twitter</li>
@@ -42,7 +42,7 @@ export const Footer = () => {
               <li>Privacidad</li>
               <li>Licencias</li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </section>
 

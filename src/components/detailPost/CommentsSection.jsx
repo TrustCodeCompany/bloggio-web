@@ -6,6 +6,8 @@ import { useUserStore } from '../../store/userStore.js'
 export const CommentsSection = ({ author, category, date, postId, imgUser }) => {
   const [comments, setComments] = useState([])
   const [newComment, setNewComment] = useState('')
+  const [replyingToCommentId, setReplyingToCommentId] = useState(null)
+  const [replyContent, setReplyContent] = useState('')
 
   const { id, userName } = useUserStore()
   console.log(userName)
@@ -48,13 +50,46 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
 
       if (response.ok) {
         setNewComment('')
-        // Espera a que el comentario sea creado y luego vuelve a obtener todos los comentarios
         fetchComments()
       } else {
         console.error('Error al publicar el comentario:', response.statusText)
       }
     } catch (error) {
       console.error('Error posting comment:', error)
+    }
+  }
+
+  const handleReplySubmit = async (parentCommentId) => {
+    const dataFormatted = {
+      commentContent: replyContent,
+      commentId: '', // En este caso, este es el ID del nuevo comentario que se está creando, normalmente se deja vacío para el backend.
+      commentIdReply: parentCommentId, // ID del comentario al que se está respondiendo.
+      commentLikes: 0,
+      commentState: 1,
+      commentTimestampCreate: null,
+      commentTimestampUpdate: null,
+      postId,
+      userId: id
+    }
+
+    try {
+      const response = await fetch('https://bloggio-api-ziu0.onrender.com/Comment/Create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataFormatted)
+      })
+
+      if (response.ok) {
+        setReplyContent('')
+        setReplyingToCommentId(null)
+        fetchComments()
+      } else {
+        console.error('Error al publicar la respuesta:', response.statusText)
+      }
+    } catch (error) {
+      console.error('Error posting reply:', error)
     }
   }
 
@@ -85,6 +120,28 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
                     <div className='w-full'>
                       <span className='font-bold'>{comment.usersDTO?.userNickname || 'Anónimo'}</span>
                       <p className='bg-slate-300 w-full rounded-lg p-2 text-sm lg:text-xs'>{comment.commentContent}</p>
+                      <button
+                        className='text-blue-500 mt-2 block'
+                        onClick={() => setReplyingToCommentId(comment.commentId)}
+                      >
+                        Responder
+                      </button>
+                      {replyingToCommentId === comment.commentId && (
+                        <div className='reply-section mt-2'>
+                          <textarea
+                            placeholder='Escribe una respuesta...'
+                            value={replyContent}
+                            onChange={(e) => setReplyContent(e.target.value)}
+                            className='w-full rounded-lg border border-gray-400 p-2 text-sm lg:text-xs'
+                          />
+                          <button
+                            className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-2'
+                            onClick={() => handleReplySubmit(comment.commentId)}
+                          >
+                            Enviar respuesta
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -102,7 +159,10 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
             className='w-full rounded-lg border border-gray-400 p-2 text-sm lg:text-xs mt-4'
           />
           {console.log(newComment)}
-          <button className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-4 px-4 font-bold' onClick={handleCommentSubmit}>
+          <button
+            className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-4 px-4 font-bold'
+            onClick={handleCommentSubmit}
+          >
             Publicar
           </button>
         </div>

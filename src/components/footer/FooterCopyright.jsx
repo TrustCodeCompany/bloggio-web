@@ -13,7 +13,7 @@ export const FooterCopyright = () => {
         derechos reservados
       </div>
       <ul className='flex justify-evenly text-xl md:gap-4 md:text-2xl'>
-        <li>
+        {/* <li>
           <a href='#'>
             <RiTwitterFill />
           </a>
@@ -27,7 +27,7 @@ export const FooterCopyright = () => {
           <a href='#'>
             <RiFacebookCircleFill />
           </a>
-        </li>
+        </li> */}
         <li>
           <a href='#'>
             <RiGithubFill />
