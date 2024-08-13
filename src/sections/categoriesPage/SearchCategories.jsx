@@ -88,15 +88,17 @@ export const SearchCategories = () => {
       )}
 
       {/* Mostrar resultados de búsqueda */}
-      {posts.length > 0 ? (
-        <ResultFindCategories posts={posts} />
-      ) : (
-        searchTerm && (
-          <div className='mt-4'>
-            <p>No se encontraron resultados para "{searchTerm}"</p>
-          </div>
-        )
-      )}
+      {posts.length > 0
+        ? (
+          <ResultFindCategories posts={posts} />
+          )
+        : (
+            searchTerm && (
+              <div className='mt-4'>
+                <p>No se encontraron resultados para "{searchTerm}"</p>
+              </div>
+            )
+          )}
 
     </div>
   )
