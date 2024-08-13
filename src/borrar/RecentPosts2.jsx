@@ -1,3 +1,5 @@
+// averiguar si esta
+
 import { Link } from 'react-router-dom'
 import img1 from '../../assets/images/img1.webp'
 import img2 from '../../assets/images/img3.jpeg'
