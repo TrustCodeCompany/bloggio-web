@@ -80,9 +80,8 @@ export const Navbar = () => {
                 />
 
                 <div
-                  className={`transition-all bg-slate-950 text-slate-200 text-sm absolute top-16 md:right-0 py-4 px-4 rounded-lg text-center w-[200px] ${
-                  photoClicked ? 'block' : 'hidden'
-                }`}
+                  className={`transition-all bg-slate-950 text-slate-200 text-sm absolute top-16 md:right-0 py-4 px-4 rounded-lg text-center w-[200px] 
+                    ${photoClicked ? 'block' : 'hidden'}`}
                 >
                   <p className='text-[10px] text-secondary font-bold border-b border-b-secondary text-center mb-4'>
                     {`Hola ${userName}`}

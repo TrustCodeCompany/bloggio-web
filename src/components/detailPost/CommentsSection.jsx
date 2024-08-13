@@ -6,12 +6,13 @@ import { useUserStore } from '../../store/userStore.js'
 export const CommentsSection = ({ author, category, date, postId, imgUser }) => {
   const [comments, setComments] = useState([])
   const [newComment, setNewComment] = useState('')
+
   const { id } = useUserStore()
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`https:/bloggio-api-xv4g.onrender.com/Comment?postId=${postId}`)
+        const response = await fetch(`https://bloggio-api-ziu0.onrender.com/Comment?postId=${postId}`)
         const data = await response.json()
         setComments(data)
       } catch (error) {
@@ -94,6 +95,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
             onChange={(e) => setNewComment(e.target.value)}
             className='w-full rounded-lg border border-gray-400 p-2 text-sm lg:text-xs mt-4'
           />
+          {console.log(newComment)}
           <button className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-4 px-4 font-bold' onClick={handleCommentSubmit}>
             Publicar
           </button>
