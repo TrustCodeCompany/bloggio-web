@@ -7,6 +7,7 @@ import burgerMenu from '../../assets/icons/icon-hamburger.svg'
 import closeMenu from '../../assets/icons/icon-menu-close.svg'
 
 import userAvatarDefault from '../../assets/images/user-male-avatar.png'
+import { MainMenuHeader } from './MainMenuHeader'
 
 export const Navbar = () => {
   const navigate = useNavigate()
@@ -32,8 +33,7 @@ export const Navbar = () => {
     <>
       <ul
         className={`bg-amber-400 h-[100vh] w-[100vw] right-full absolute top-0 mt-0 pl-0 transition-all z-30 md:right-0 md:bg-white md:static md:h-auto ${
-          menuClicked ? '!right-0' : ''
-        }`}
+          menuClicked ? '!right-0' : ''}`}
       >
         <div className='flex justify-end'>
           <div className='p-6 md:hidden' onClick={handleClick}>
@@ -42,33 +42,8 @@ export const Navbar = () => {
         </div>
 
         <div className='flex flex-col mt-10 items-center h-full md:flex-row md:mt-0 md:h-auto md:justify-end'>
-          <li className='list-none mb-8 sm:mb-0 md:cursor-pointer border-b border-b-gray-500 w-[60%] text-center leading-loose md:leading-none md:text-start md:w-fit md:mr-2 md:border-none'>
-            <Link
-              to='/'
-              className='text-2xl font-extrabold uppercase hover:text-secondary text-4 p-3 md:hover:text-secondary md:hover:border-b md:hover:border-secondary transition-all md:text-base'
-            >
-              Inicio
-            </Link>
-          </li>
-
-          <li className='list-none mb-8 sm:mb-0 md:cursor-pointer border-b border-b-gray-500 w-[60%] text-center leading-loose md:leading-none md:text-start md:w-fit md:mr-2 md:border-none'>
-            <Link
-              to='/categories'
-              className='text-2xl font-extrabold uppercase hover:text-secondary text-4 p-3 md:hover:text-secondary md:hover:border-b md:hover:border-secondary transition-all md:text-base'
-            >
-              Categorias
-            </Link>
-          </li>
-
-          <li className='list-none mb-8 sm:mb-0 md:cursor-pointer border-b border-b-gray-500 w-[60%] text-center leading-loose md:leading-none md:text-start md:w-fit md:mr-2 md:border-none'>
-            <Link
-              to='/about'
-              className='text-2xl font-extrabold uppercase hover:text-secondary text-4 p-3 md:hover:text-secondary md:hover:border-b md:hover:border-secondary transition-all md:text-base'
-            >
-              Nosotros
-            </Link>
-          </li>
-
+          {/* aca va el menu principal */}
+          <MainMenuHeader />
           {logged
             ? (
               <div className='object-cover relative flex justify-center'>
