@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import imgUserAvatar from '../../../src/assets/images/user-male-avatar.png'
 import { MyProfileCard } from './MyProfileCard.jsx'
-import { MyProfileEditModal } from './MyProfileEditModal.jsx'
 import { useUserStore } from '../../store/userStore.js'
+import { MyProfileEditModal } from './myProfileEditModal/MyProfileEditModal.jsx'
 
 export const MyProfile = () => {
   const [posts, setPosts] = useState([])
