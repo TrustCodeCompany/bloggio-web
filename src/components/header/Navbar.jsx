@@ -1,33 +1,22 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import { useUserStore } from '../../store/userStore'
 
 import burgerMenu from '../../assets/icons/icon-hamburger.svg'
 import closeMenu from '../../assets/icons/icon-menu-close.svg'
 
-import userAvatarDefault from '../../assets/images/user-male-avatar.png'
 import { MainMenuHeader } from './MainMenuHeader'
+import { LoggedInAvatarMenu } from './LoggedInAvatarMenu'
+import { LoggedOutAvatarMenu } from './LoggedOutAvatarMenu'
 
 export const Navbar = () => {
-  const navigate = useNavigate()
-
   const [menuClicked, setMenuClicked] = useState(false)
-  const [photoClicked, setPhotoClicked] = useState(false)
 
   const handleClick = () => {
     setMenuClicked(() => !menuClicked)
   }
 
-  const handlePhotoClick = () => setPhotoClicked(() => !photoClicked)
-
-  const { logoutUser, userName, logged, userAvatar } = useUserStore()
-
-  const handleLogoutClick = (event) => {
-    event.preventDefault()
-    logoutUser()
-    navigate('/', { replace: true })
-  }
+  const { logged } = useUserStore()
 
   return (
     <>
@@ -46,57 +35,12 @@ export const Navbar = () => {
           <MainMenuHeader />
           {logged
             ? (
-              <div className='object-cover relative flex justify-center'>
-                <img
-                  className='w-14 h-14 object-cover rounded-full object-top border-2 border-slate-950 cursor-pointer'
-                  onClick={handlePhotoClick}
-                  src={userAvatar || userAvatarDefault}
-                  alt=''
-                />
-
-                <div
-                  className={`transition-all bg-slate-950 text-slate-200 text-sm absolute top-16 md:right-0 py-4 px-4 rounded-lg text-center w-[200px] 
-                    ${photoClicked ? 'block' : 'hidden'}`}
-                >
-                  <p className='text-[10px] text-secondary font-bold border-b border-b-secondary text-center mb-4'>
-                    {`Hola ${userName}`}
-                  </p>
-                  <ul className='leading-8'>
-                    <li className='hover:text-secondary'>
-                      <Link className='' to='/create-post'>
-                        Crear Post
-                      </Link>
-                    </li>
-                    <li className='hover:text-secondary'>
-                      <Link className='' to='/my-profile'>
-                        Mi Perfil
-                      </Link>
-                    </li>
-                    <li className='hover:text-secondary'>
-                      <a href='#'>Configuración</a>
-                    </li>
-                    <li className='text-orange-700 uppercase font-bold text-xs'>
-                      <Link
-                        className='hover:bg-orange-700 hover:text-slate-300 block w-full mt-2 py-2 rounded-md transition-all'
-                        // to='/'
-                        onClick={handleLogoutClick}
-                      >
-                        Cerrar Sesión
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              // aca va el menu cuando esta logueado el usuario
+              <LoggedInAvatarMenu />
               )
             : (
-              <>
-                <Link
-                  className='bg-slate-900 text-slate-200 font-bold px-4 py-4 rounded-xl transition-all hover:text-secondary hover:shadow-xl md:ml-4 mb-6 mt-10 md:mt-0 md:mb-0 w-2/3 md:w-fit text-center uppercase text-lg md:text-xs md:py-2 md:px-8'
-                  to='/login'
-                >
-                  Login
-                </Link>
-              </>
+              // aca va el menu cuando NO esta logueado el usuario
+              <LoggedOutAvatarMenu />
               )}
         </div>
       </ul>
