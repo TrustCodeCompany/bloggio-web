@@ -9,7 +9,7 @@ export const useUserStore = create(
       password: null,
       token: null,
       logged: false,
-      userShortBio: '',
+      userShortBio: null,
       userAvatar: null,
       role: [],
 

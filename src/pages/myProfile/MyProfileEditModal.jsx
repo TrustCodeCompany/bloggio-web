@@ -2,16 +2,13 @@
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import { ShowErrorAlert, ShowSuccessAlert } from '../../utils'
+import { useUserStore } from '../../store/userStore'
 
-// export const MyProfileEditModal = ({ isOpen, onClose, userData, onChange, onSave, handleSetImage, imageSelected, isAvatarVisible, isImageSelectedVisible }) => {
-export const MyProfileEditModal = ({ userData, id }) => {
-  const [modalOpen, setModalOpen] = useState(false)
+export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
+  const { id } = useUserStore()
   const [imageSelected, setImageSelected] = useState(null)
-  const [isAvatarVisible, setAvatarVisible] = useState(false)
-  const [isSelectedImageVisible, setSelectedImageVisible] = useState(false)
-  const [imageFile, setImageFile] = useState(null) // Estado para la imagen
+  const [imageFile, setImageFile] = useState(null)
 
-  // endpoint para obtener los datos del usuario
   const urlUpdateProfile = 'https://bloggio-api-zc58.onrender.com/auth/update-profile'
 
   const handleCloseModal = () => {
@@ -21,7 +18,7 @@ export const MyProfileEditModal = ({ userData, id }) => {
   const handleChangeUserData = (key, value) => {
     setUserData({
       ...userData,
-      [key]: value
+      [key]: value || '' // Asegura que no sea null
     })
   }
 
@@ -35,15 +32,14 @@ export const MyProfileEditModal = ({ userData, id }) => {
       return
     }
 
-    let dataFormatted = {
+    const dataFormatted = {
       userId: id,
       userNickname: userData.nickname,
       userShortBio: userData.shortbio
     }
     const formData = new FormData()
-    dataFormatted = JSON.stringify(dataFormatted)
-    formData.append('user', new Blob([dataFormatted], { type: 'application/json' }))
-    formData.append('file', new Blob([imageFile], { type: 'application/octet-stream' }))
+    formData.append('user', new Blob([JSON.stringify(dataFormatted)], { type: 'application/json' }))
+    formData.append('file', imageFile || '')
 
     try {
       const response = await fetch(urlUpdateProfile, {
@@ -55,11 +51,7 @@ export const MyProfileEditModal = ({ userData, id }) => {
         throw new Error('Hubo un problema con la petición: ' + response.status)
       }
 
-      const result = await (response).json()
-
-      ShowSuccessAlert(
-        'Datos actualizados correctamente'
-      )
+      ShowSuccessAlert('Datos actualizados correctamente')
     } catch (error) {
       console.error('Error al enviar la petición:', error)
       ShowErrorAlert('Error al enviar la petición: ' + error.message)
@@ -69,13 +61,8 @@ export const MyProfileEditModal = ({ userData, id }) => {
 
   const handleSetImage = (image) => {
     setImageFile(image)
-    console.log(image)
     setImageSelected(URL.createObjectURL(image))
-    setAvatarVisible(true)
-    setSelectedImageVisible(false)
   }
-
-  // if (!isOpen) return null
 
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50'>
@@ -95,19 +82,16 @@ export const MyProfileEditModal = ({ userData, id }) => {
           onChange={(e) => handleChangeUserData('shortbio', e.target.value)}
           className='w-full p-2 border border-gray-300 rounded mb-2'
         />
-        <img
-          className='h-auto w-24 ml-2'
-          src={userData.avatar}
-          alt=''
-        />
-        {/* <img
-            className='h-auto w-24 mr-2'
-            src={imageSelected}
-            alt=''
-          /> */}
+        {userData.avatar && (
+          <img
+            className='h-auto w-24 ml-2'
+            src={userData.avatar}
+            alt='Avatar'
+          />
+        )}
         <input
           type='file'
-          onChange={(e) => handleChangeUserData(handleSetImage(e.target.files[0]))}
+          onChange={(e) => handleSetImage(e.target.files[0])}
           className='w-full p-2 border border-gray-300 rounded mb-2'
         />
         <div className='flex justify-end'>
