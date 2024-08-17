@@ -1,13 +1,18 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
 import { ShowErrorAlert, ShowSuccessAlert } from '../../utils'
 import { useUserStore } from '../../store/userStore'
 
 export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
-  const { id } = useUserStore()
+  const { id, userAvatar, setUserAvatar } = useUserStore()
   const [imageSelected, setImageSelected] = useState(null)
   const [imageFile, setImageFile] = useState(null)
+
+  useEffect(() => {
+    // Muestra la imagen actual del usuario al abrir el modal
+    setImageSelected(userAvatar)
+  }, [userAvatar])
 
   const urlUpdateProfile = 'https://bloggio-api-zc58.onrender.com/auth/update-profile'
 
@@ -52,6 +57,11 @@ export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
       }
 
       ShowSuccessAlert('Datos actualizados correctamente')
+
+      // Actualiza la imagen del avatar en el store global
+      if (imageFile) {
+        setUserAvatar(imageSelected)
+      }
     } catch (error) {
       console.error('Error al enviar la petición:', error)
       ShowErrorAlert('Error al enviar la petición: ' + error.message)
@@ -71,21 +81,21 @@ export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
         <input
           type='text'
           placeholder='Nickname'
-          value={userData.nickname}
+          value={userData.nickname || ''} // Asegúrate de que value nunca sea null
           onChange={(e) => handleChangeUserData('nickname', e.target.value)}
           className='w-full p-2 border border-gray-300 rounded mb-2'
         />
         <input
           type='text'
           placeholder='Short Bio'
-          value={userData.shortbio}
+          value={userData.shortbio || ''} // Asegúrate de que value nunca sea null
           onChange={(e) => handleChangeUserData('shortbio', e.target.value)}
           className='w-full p-2 border border-gray-300 rounded mb-2'
         />
-        {userData.avatar && (
+        {imageSelected && (
           <img
             className='h-auto w-24 ml-2'
-            src={userData.avatar}
+            src={imageSelected}
             alt='Avatar'
           />
         )}

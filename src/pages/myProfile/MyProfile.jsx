@@ -13,16 +13,16 @@ export const MyProfile = () => {
   const API_URL = `https://bloggio-api-zc58.onrender.com/Post/get-by-user/${id}?limit=30&offset=1`
 
   const [userData, setUserData] = useState({
-    nickname: userName || '', // Asegura que el valor no sea null
-    shortbio: userShortBio || '', // Asegura que el valor no sea null
-    avatar: userAvatar || null
+    nickname: '',
+    shortbio: '',
+    avatar: null
   })
 
   const handleEditProfileClick = () => {
     setUserData({
-      nickname: userName || '',
-      shortbio: userShortBio || '',
-      avatar: userAvatar || null
+      nickname: userName,
+      shortbio: userShortBio,
+      avatar: userAvatar
     })
     setModalOpen(true)
   }
@@ -62,13 +62,23 @@ export const MyProfile = () => {
       </div>
 
       <div className='bg-white rounded-lg shadow-md p-4 flex flex-col items-center'>
-        <img
-          src={userAvatar || imgUserAvatar}
-          alt='Profile'
-          className='w-24 h-24 rounded-full'
-        />
+        {userAvatar
+          ? (
+            <img
+              src={userAvatar}
+              alt='Profile'
+              className='w-24 h-24 rounded-full'
+            />
+            )
+          : (
+            <img
+              src={imgUserAvatar}
+              alt='Profile'
+              className='w-24 h-24 rounded-full'
+            />
+            )}
         <h2 className='text-xl font-semibold mt-4'>{userName}</h2>
-        <p>{userShortBio || ''}</p>
+        <p>{userShortBio}</p>
         <button
           onClick={handleEditProfileClick}
           className='mt-2 text-blue-500 hover:underline'
@@ -78,7 +88,11 @@ export const MyProfile = () => {
       </div>
 
       {modalOpen && (
-        <MyProfileEditModal userData={userData} setUserData={setUserData} setModalOpen={setModalOpen} />
+        <MyProfileEditModal
+          userData={userData}
+          setUserData={setUserData}
+          setModalOpen={setModalOpen}
+        />
       )}
     </div>
   )

@@ -12,8 +12,6 @@ export const MyProfileCard = ({ image, title, description, date, postId, onDelet
     setDropdownVisible(!dropdownVisible)
   }
 
-  console.log(postId)
-
   const handleDeleteConfirm = async () => {
     // llamo al modal de confirmación de eliminación
     ShowConfirmationDeleteAlert(
