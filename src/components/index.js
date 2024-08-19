@@ -1,3 +1,5 @@
+export { EditPost } from './editPost/EditPost'
+
 export { CommentsSection } from './detailPost/CommentsSection'
 
 export { Headers } from './header/Headers'

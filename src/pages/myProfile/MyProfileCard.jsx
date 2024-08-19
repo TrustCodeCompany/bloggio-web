@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import imgUserAvatarDefault from '../../../src/assets/images/user-male-avatar.png'
 import { ShowConfirmationDeleteAlert } from '../../utils/ShowConfirmationDeleteAlert'
+import { RiMenu5Fill } from 'react-icons/ri'
 
-export const MyProfileCard = ({ image, title, description, date, postId, onDelete, handleDelete }) => {
+export const MyProfileCard = ({ image, title, description, date, postId, onDelete }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false)
 
   const toggleDropdown = () => {
@@ -13,7 +13,6 @@ export const MyProfileCard = ({ image, title, description, date, postId, onDelet
   }
 
   const handleDeleteConfirm = async () => {
-    // llamo al modal de confirmación de eliminación
     ShowConfirmationDeleteAlert(
       `https://bloggio-api-zc58.onrender.com/Post/${postId}`,
       onDelete,
@@ -39,14 +38,16 @@ export const MyProfileCard = ({ image, title, description, date, postId, onDelet
             className='text-gray-500 hover:text-gray-700'
             onClick={toggleDropdown}
           >
-            <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 6v6m6 0H6' />
-            </svg>
+            <RiMenu5Fill />
           </button>
           {dropdownVisible && (
             <div className='absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10'>
-              <a href='#' className='block px-4 py-2 text-gray-800 hover:bg-gray-100'>Edit Post</a>
-              <button onClick={handleDeleteConfirm} className='block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100'>Delete Post</button>
+              <Link to={`/edit-post/${postId}`} className='block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100'>
+                Edit Post
+              </Link>
+              <button onClick={handleDeleteConfirm} className='block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100'>
+                Delete Post
+              </button>
             </div>
           )}
         </div>

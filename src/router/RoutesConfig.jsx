@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { Layout } from '../components'
+import { EditPost, Layout } from '../components'
 import { useUserStore } from '../store/userStore'
 import { AboutUs, Categories, CocinaPage, CreatePost, DeportesPage, DetailPost, HomePage, LoginPage, MyProfile, OtrosCategoriesPage, PaternidadPage, SaludPage, SignUp, TecnologiaPage, ViajesPage } from './../pages'
 import { ProtectedRoutes } from './../utils/ProtectedRoutes'
@@ -28,6 +28,7 @@ export const RoutesConfig = () => {
 
         <Route element={<ProtectedRoutes canActivate={logged} />}>
           <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/edit-post/:id' element={<EditPost />} /> {/* Nueva ruta protegida para editar post */}
         </Route>
       </Route>
     </Routes>
