@@ -109,6 +109,8 @@ export const LoginPage = () => {
               className='bg-slate-950 text-slate-300 px-5 py-2 rounded-lg block w-[100%] shadow-2xl md:mt-10 md:py-4 cursor-pointer hover:scale-105 transition-all'
             />
 
+            <p className=''>¿Olvidaste tu contraseña?</p>
+
             <p className='mt-3'>No tienes cuenta? <Link to='/create-user' className='text-purple-700 hover:text-secondary transition-all'>Crear una cuenta</Link></p>
           </form>
         </div>
