@@ -10,6 +10,7 @@ import { Tooltip } from '../../utils/Tooltip.jsx'
 import { ComboCategories } from '../categories/ComboCategories.jsx'
 import { TextEditor } from '../createPost/TextEditor.jsx'
 import { useUserStore } from '../../store/userStore.js'
+import { ENDPOINTS } from '../../api/apiEndpoints.js'
 
 export const EditPost = () => {
   const [mainContent, setMainContent] = useState(null)
@@ -33,7 +34,8 @@ export const EditPost = () => {
     const fetchPostData = async () => {
       try {
         const response = await fetch(
-          `https://bloggio-api-zc58.onrender.com/Post/${postId}`
+          // eslint-disable-next-line no-template-curly-in-string
+          ENDPOINTS.findPostById + '/' + postId
         )
         const post = await response.json()
         if (post) {
@@ -90,10 +92,11 @@ export const EditPost = () => {
     console.log(formData)
 
     try {
-      await fetch(`https://bloggio-api-zc58.onrender.com/Post/${postId}`, {
-        method: 'PUT',
+      await fetch(ENDPOINTS.editPost, {
+        method: 'POST',
         body: formData
       })
+      console.log('recuperando data')
       setLoading(false)
       navigate(`/detail-post/${postId}`)
     } catch (error) {

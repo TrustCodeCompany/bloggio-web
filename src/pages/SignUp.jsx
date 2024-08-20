@@ -4,9 +4,9 @@ import { MutatingDots } from 'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 import { ShowErrorAlert } from '../utils/ShowErrorAlert'
 import { ShowSuccessAlert } from '../utils/ShowSuccessAlert'
+import { ENDPOINTS } from '../api/apiEndpoints.js'
 
 export const SignUp = () => {
-  const basepath = 'https://bloggio-api-zc58.onrender.com'
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false) // Estado para el spinner
 
@@ -28,7 +28,7 @@ export const SignUp = () => {
 
     setLoading(true) // Mostrar spinner
     try {
-      const response = await fetch(`${basepath}/auth/signup`, {
+      const response = await fetch(ENDPOINTS.signup, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

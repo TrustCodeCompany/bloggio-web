@@ -7,6 +7,7 @@ import {
 import { MutatingDots } from 'react-loader-spinner'
 import { Link } from 'react-router-dom'
 import { formatDate } from './../../utils/dateHelper'
+import { ENDPOINTS } from '../../api/apiEndpoints.js'
 
 export const RecentPosts = () => {
   const [posts, setPosts] = useState([])
@@ -15,7 +16,7 @@ export const RecentPosts = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://bloggio-api-zc58.onrender.com/Post/GetTop4Post')
+        const response = await fetch(ENDPOINTS.getTop4Post)
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
