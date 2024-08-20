@@ -7,6 +7,7 @@ import { TextInput } from './TextInput'
 import { ImagePreview } from './ImagePreview'
 import { FileInput } from './FileInput'
 import { ActionButtons } from './ActionButtons'
+import { ENDPOINTS } from '../../../api/apiEndpoints.js'
 
 // Componente principal MyProfileEditModal: Modal para editar el perfil del usuario
 export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
@@ -21,8 +22,6 @@ export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
   useEffect(() => {
     setImageSelected(userAvatar)
   }, [userAvatar])
-
-  const urlUpdateProfile = 'https://bloggio-api-zc58.onrender.com/auth/update-profile'
 
   // Función para cerrar el modal
   const handleCloseModal = () => {
@@ -67,7 +66,7 @@ export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
     }
 
     try {
-      const response = await fetch(urlUpdateProfile, {
+      const response = await fetch(ENDPOINTS.updateProfile, {
         method: 'POST',
         body: formData
       })

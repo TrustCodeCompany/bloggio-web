@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { ModalFindCategoriesByDate } from './ModalFindCategoriesByDate'
 import { ResultFindCategories } from './ResultFindCategories'
+import { ENDPOINTS } from '../../api/apiEndpoints.js'
 
 export const SearchCategories = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -17,7 +18,7 @@ export const SearchCategories = () => {
       }
 
       try {
-        const response = await fetch('https://bloggio-api-zc58.onrender.com/Post/find-all-by-filters', {
+        const response = await fetch(ENDPOINTS.getAllPostByDeportesCategory, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

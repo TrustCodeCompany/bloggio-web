@@ -3,6 +3,7 @@ import imgUserAvatar from '../../../src/assets/images/user-male-avatar.png'
 import { MyProfileCard } from './MyProfileCard.jsx'
 import { useUserStore } from '../../store/userStore.js'
 import { MyProfileEditModal } from './myProfileEditModal/MyProfileEditModal.jsx'
+import { ENDPOINTS } from '../../api/apiEndpoints.js'
 
 export const MyProfile = () => {
   const [posts, setPosts] = useState([])
@@ -10,7 +11,7 @@ export const MyProfile = () => {
   const [reloadPosts, setReloadPosts] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
 
-  const API_URL = `https://bloggio-api-zc58.onrender.com/Post/get-by-user/${id}?limit=30&offset=1`
+  const API_URL = ENDPOINTS.getPostsByUserId + '/' + id + '?limit=30&offset=1'
 
   const [userData, setUserData] = useState({
     nickname: '',

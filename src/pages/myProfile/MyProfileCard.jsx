@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import imgUserAvatarDefault from '../../../src/assets/images/user-male-avatar.png'
 import { ShowConfirmationDeleteAlert } from '../../utils/ShowConfirmationDeleteAlert'
 import { RiMenu5Fill } from 'react-icons/ri'
+import { ENDPOINTS } from '../../api/apiEndpoints.js'
 
 export const MyProfileCard = ({ image, title, description, date, postId, onDelete }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false)
@@ -14,7 +15,7 @@ export const MyProfileCard = ({ image, title, description, date, postId, onDelet
 
   const handleDeleteConfirm = async () => {
     ShowConfirmationDeleteAlert(
-      `https://bloggio-api-zc58.onrender.com/Post/${postId}`,
+      ENDPOINTS.deletePostById + '/' + postId,
       onDelete,
       setDropdownVisible
     )
