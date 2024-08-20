@@ -1,3 +1,7 @@
+export { ResetPassword } from './ResetPassword'
+
+export { RecoveryPassword } from './RecoveryPassword'
+
 export { MyProfile } from './myProfile/MyProfile'
 
 export { OtrosCategoriesPage } from './categories/OtrosCategoriesPage'
