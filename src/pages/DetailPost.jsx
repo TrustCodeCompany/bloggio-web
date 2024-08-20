@@ -9,17 +9,16 @@ import {
   RelatedPostsDetailPostPage
 } from './../sections'
 import './DetailPost.css'
+import { ENDPOINTS } from '../api/apiEndpoints.js'
 
 export const DetailPost = () => {
   const { id } = useParams() // Extrae el ID de los parámetros de la URL
   const [post, setPost] = useState(null)
-  console.log(post)
   const [loading, setLoading] = useState(true)
-
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`https://bloggio-api-zc58.onrender.com/Post/${id}`)
+        const response = await fetch(ENDPOINTS.findPostById + '/' + id)
         const data = await response.json()
         console.log(data)
         setPost(data)

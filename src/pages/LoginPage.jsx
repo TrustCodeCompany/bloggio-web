@@ -29,7 +29,13 @@ export const LoginPage = () => {
         throw new Error('Hubo un problema con la petición: ' + dataLogin.status)
       }
 
-      setUser(dataLogin.userId, dataLogin.userNickname, dataLogin.userEmail, dataLogin.token, dataLogin.userPhoto)
+      setUser(
+        dataLogin.userId,
+        dataLogin.userNickname,
+        dataLogin.userEmail,
+        dataLogin.token,
+        dataLogin.userPhoto
+      )
       navigate('/', { replace: true })
     } finally {
       setLoading(false) // Ocultar spinner
@@ -38,7 +44,6 @@ export const LoginPage = () => {
 
   return (
     <>
-
       {loading && (
         <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30'>
           <MutatingDots
@@ -109,7 +114,22 @@ export const LoginPage = () => {
               className='bg-slate-950 text-slate-300 px-5 py-2 rounded-lg block w-[100%] shadow-2xl md:mt-10 md:py-4 cursor-pointer hover:scale-105 transition-all'
             />
 
-            <p className='mt-3'>No tienes cuenta? <Link to='/create-user' className='text-purple-700 hover:text-secondary transition-all'>Crear una cuenta</Link></p>
+            <Link
+              to='/recovery-password'
+              className='block text-center pt-2 pb-4 text-blue-900 text-sm'
+            >
+              ¿Olvidaste tu contraseña?
+            </Link>
+
+            <p className='mt-3'>
+              No tienes cuenta?{' '}
+              <Link
+                to='/create-user'
+                className='text-purple-700 hover:text-secondary transition-all'
+              >
+                Crear una cuenta
+              </Link>
+            </p>
           </form>
         </div>
       </div>

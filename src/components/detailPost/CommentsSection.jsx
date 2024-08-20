@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import userAvatar from '../../assets/images/user-male-avatar.png'
 import { useUserStore } from '../../store/userStore.js'
+import { ENDPOINTS } from '../../api/apiEndpoints.js'
 
 // eslint-disable-next-line react/prop-types
 export const CommentsSection = ({ author, category, date, postId, imgUser }) => {
@@ -14,7 +15,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
 
   const fetchComments = useCallback(async () => {
     try {
-      const response = await fetch(`https://bloggio-api-zc58.onrender.com/Comment?postId=${postId}`)
+      const response = await fetch(ENDPOINTS.commentByPostId + '?postId=' + postId)
       const data = await response.json()
       setComments(data)
     } catch (error) {
@@ -40,7 +41,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
     }
 
     try {
-      const response = await fetch('https://bloggio-api-zc58.onrender.com/Comment/Create', {
+      const response = await fetch(ENDPOINTS.createComment, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -73,7 +74,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
     }
 
     try {
-      const response = await fetch('https://bloggio-api-zc58.onrender.com/Comment/Create', {
+      const response = await fetch(ENDPOINTS.createComment, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
