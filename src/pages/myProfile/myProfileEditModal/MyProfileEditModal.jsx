@@ -21,6 +21,7 @@ export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
   // useEffect para establecer la imagen actual del avatar al abrir el modal
   useEffect(() => {
     setImageSelected(userAvatar)
+    console.log(userAvatar?.substring(67))
   }, [userAvatar])
 
   // Función para cerrar el modal
@@ -38,8 +39,6 @@ export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
 
   // Función para guardar los datos del usuario y actualizar el perfil
   const handleSaveUserData = async () => {
-    console.log(userData)
-    console.log(imageFile)
 
     // Validación para el campo Nickname (es obligatorio)
     if (userData.nickname.trim() === '') {
@@ -55,15 +54,21 @@ export const MyProfileEditModal = ({ userData, setUserData, setModalOpen }) => {
     const dataFormatted = {
       userId: id,
       userNickname: userData.nickname,
-      userShortBio: userData.shortbio || '' // Short Bio es opcional
+      userShortBio: userData.shortbio || '', // Short Bio es opcional
+      imageOldSelectedName: imageSelected
     }
     const formData = new FormData()
-    formData.append('user', new Blob([JSON.stringify(dataFormatted)], { type: 'application/json' }))
 
     // La imagen de usuario es opcional
     if (imageFile) {
       formData.append('file', new Blob([imageFile], { type: 'application/octet-stream' }))
+      dataFormatted.imageOldSelectedName = false
+    } else {
+      dataFormatted.imageOldSelectedName = true
+      formData.append('file', new Blob([imageSelected], { type: 'application/octet-stream' }))
     }
+
+    formData.append('user', new Blob([JSON.stringify(dataFormatted)], { type: 'application/json' }))
 
     try {
       const response = await fetch(ENDPOINTS.updateProfile, {
