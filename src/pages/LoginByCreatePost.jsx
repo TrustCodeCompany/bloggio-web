@@ -29,7 +29,8 @@ export const LoginByCreatePost = () => {
       draggable: true,
       progress: undefined,
       theme: 'colored',
-      transition: Bounce
+      transition: Bounce,
+      type: 'info'
     })
     notify()
   }, [])
