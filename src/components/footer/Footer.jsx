@@ -14,9 +14,13 @@ export const Footer = () => {
         <div className='md:flex md:justify-between lg:w-[75%]'>
           <div className='flex justify-around mb-10 md:w-1/2'>
             <ul className=''>
-              <li className='text-slate-400'>Empresa</li>
-              <li>Nosotros</li>
-              {/* <li>Noticias</li> */}
+              <li className='text-slate-900 font-bold text-base underline mb-4'>Empresa</li>
+              <Link
+                to='/about'
+                className='text-sm hover:text-secondary md:hover:text-secondary'
+              >
+                Nosotros
+              </Link>
               <li
                 className='list-none'
               >
