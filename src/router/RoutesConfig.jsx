@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { EditPost, Layout } from '../components'
 import { useUserStore } from '../store/userStore'
-import { AboutUs, Categories, CocinaPage, CreatePost, DeportesPage, DetailPost, HomePage, LoginByCreatePost, LoginPage, MyProfile, OtrosCategoriesPage, PaternidadPage, RecoveryPassword, ResetPassword, SaludPage, SignUp, TecnologiaPage, ViajesPage } from './../pages'
+import { AboutUs, Categories, CocinaPage, Contac, CreatePost, DeportesPage, DetailPost, HomePage, LoginByCreatePost, LoginPage, MyProfile, OtrosCategoriesPage, PaternidadPage, RecoveryPassword, ResetPassword, SaludPage, SignUp, TecnologiaPage, ViajesPage } from './../pages'
 import { ProtectedRoutes } from './../utils/ProtectedRoutes'
 
 export const RoutesConfig = () => {
@@ -25,6 +25,7 @@ export const RoutesConfig = () => {
         <Route path='/category-deportes' element={<DeportesPage />} />
         <Route path='/category-otros' element={<OtrosCategoriesPage />} />
         <Route path='/about' element={<AboutUs />} />
+        <Route path='/contact' element={<Contac />} />
         <Route path='/recovery-password' element={<RecoveryPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='*' element={<HomePage />} />

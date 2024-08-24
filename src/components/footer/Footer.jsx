@@ -1,4 +1,5 @@
 import { FooterCopyright } from './FooterCopyright'
+import { Link } from 'react-router-dom'
 
 export const Footer = () => {
   return (
@@ -16,7 +17,16 @@ export const Footer = () => {
               <li className='text-slate-400'>Empresa</li>
               <li>Nosotros</li>
               {/* <li>Noticias</li> */}
-              <li>Contacto</li>
+              <li
+                className='list-none'
+              >
+                <Link
+                  to='/contact'
+                  className='text-sm hover:text-secondary md:hover:text-secondary'
+                >
+                  Contacto
+                </Link>
+              </li>
             </ul>
 
             {/* <ul>

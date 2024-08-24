@@ -24,6 +24,8 @@ export { SignUp } from './SignUp'
 
 export { AboutUs } from './AboutUs'
 
+export { Contac } from './Contac.jsx'
+
 export { Categories } from './Categories'
 
 export { DetailPost } from './DetailPost'
