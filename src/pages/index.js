@@ -1,3 +1,5 @@
+export { LoginByCreatePost } from './LoginByCreatePost'
+
 export { ResetPassword } from './ResetPassword'
 
 export { RecoveryPassword } from './RecoveryPassword'
@@ -31,4 +33,3 @@ export { CreatePost } from './CreatePost'
 export { LoginPage } from './LoginPage'
 
 export { HomePage } from './HomePage'
-

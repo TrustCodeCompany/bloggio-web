@@ -39,7 +39,7 @@ export const LoggedInAvatarMenu = () => {
   }, [])
 
   return (
-    <div className='object-cover relative flex justify-center'>
+    <div className='object-cover relative flex justify-center md:ml-4'>
       <img
         ref={imgRef}
         className='w-14 h-14 object-cover rounded-full object-top border-2 border-slate-950 cursor-pointer'
@@ -57,11 +57,11 @@ export const LoggedInAvatarMenu = () => {
           {`Hola ${userName}`}
         </p>
         <ul className='leading-8'>
-          <li className='hover:text-secondary'>
+          {/* <li className='hover:text-secondary'>
             <Link className='' to='/create-post' onClick={handlePhotoClick}>
               Crear Post
             </Link>
-          </li>
+          </li> */}
           <li className='hover:text-secondary'>
             <Link className='' to='/my-profile' onClick={handlePhotoClick}>
               Mi Perfil

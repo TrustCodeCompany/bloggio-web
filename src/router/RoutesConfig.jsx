@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { EditPost, Layout } from '../components'
 import { useUserStore } from '../store/userStore'
-import { AboutUs, Categories, CocinaPage, CreatePost, DeportesPage, DetailPost, HomePage, LoginPage, MyProfile, OtrosCategoriesPage, PaternidadPage, RecoveryPassword, ResetPassword, SaludPage, SignUp, TecnologiaPage, ViajesPage } from './../pages'
+import { AboutUs, Categories, CocinaPage, CreatePost, DeportesPage, DetailPost, HomePage, LoginByCreatePost, LoginPage, MyProfile, OtrosCategoriesPage, PaternidadPage, RecoveryPassword, ResetPassword, SaludPage, SignUp, TecnologiaPage, ViajesPage } from './../pages'
 import { ProtectedRoutes } from './../utils/ProtectedRoutes'
 
 export const RoutesConfig = () => {
@@ -12,6 +12,7 @@ export const RoutesConfig = () => {
         <Route path='/' element={<HomePage />} />
         <Route path='/home' element={<HomePage />} />
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/login-by-createPost' element={<LoginByCreatePost />} />
         <Route path='/create-user' element={<SignUp />} />
         <Route path='/my-profile' element={<MyProfile />} />
         <Route path='/detail-post/:id' element={<DetailPost />} />
