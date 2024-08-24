@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import {
-  RiFacebookCircleFill,
-  RiInstagramFill,
-  RiTwitterFill
-} from 'react-icons/ri'
+// import {
+//   RiFacebookCircleFill,
+//   RiInstagramFill,
+//   RiTwitterFill
+// } from 'react-icons/ri'
 import { MutatingDots } from 'react-loader-spinner'
 import { Link } from 'react-router-dom'
 import { formatDate } from './../../utils/dateHelper'
@@ -86,7 +86,7 @@ export const RecentPosts = () => {
                       </ul>
                     </div>
                     {/* iconos redes sociales */}
-                    <div>
+                    {/* <div>
                       <ul className='flex gap-2'>
                         <li className='border border-gray-500 rounded-full p-2 hover:scale-110 transition-all'>
                           <a className='block text-2xl text-[#1DA1F2]' href='#'>
@@ -104,7 +104,7 @@ export const RecentPosts = () => {
                           </a>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export const RecentPosts = () => {
                       </div>
                     </div>
                     {/* iconos redes sociales */}
-                    <div>
+                    {/* <div>
                       <ul className='flex gap-2 lg:hidden'>
                         <li className='border border-gray-500 rounded-full p-2 lg:h-fit lg:p-1 hover:scale-110 transition-all'>
                           <a
@@ -171,7 +171,7 @@ export const RecentPosts = () => {
                           </a>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}

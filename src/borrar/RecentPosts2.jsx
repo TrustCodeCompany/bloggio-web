@@ -76,7 +76,7 @@ export const RecentPosts = () => {
               </div>
 
               {/* iconos redes sociales */}
-              <div>
+              {/* <div>
                 <ul className='flex gap-2'>
                   <li className='border border-gray-500 rounded-full p-2 hover:scale-110 transition-all'>
                     <a className='block text-2xl text-[#1DA1F2]' href='#'>
@@ -94,7 +94,7 @@ export const RecentPosts = () => {
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import img1 from '../assets/images/img1.webp'
-import {
-  RiTwitterFill,
-  RiFacebookCircleFill,
-  RiInstagramFill
-} from 'react-icons/ri'
+// import {
+//   RiTwitterFill,
+//   RiFacebookCircleFill,
+//   RiInstagramFill
+// } from 'react-icons/ri'
 
 export const Card1 = () => {
   return (
@@ -40,7 +40,7 @@ export const Card1 = () => {
         </div>
       </div>
       {/* iconos redes sociales */}
-      <div>
+      {/* <div>
         <ul className='flex gap-2'>
           <li className='border border-gray-500 rounded-full p-2'>
             <a className='block text-2xl text-[#1DA1F2]' href='#'>
@@ -58,7 +58,7 @@ export const Card1 = () => {
             </a>
           </li>
         </ul>
-      </div>
+      </div> */}
     </div>
   )
 }
