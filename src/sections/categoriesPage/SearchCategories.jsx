@@ -65,7 +65,10 @@ export const SearchCategories = () => {
   return (
     <div className='flex flex-col w-full mb-6'>
       <section className='w-full mb-4'>
-        <form onSubmit={(e) => e.preventDefault()} className='w-full flex justify-between'>
+        <form
+          onSubmit={(e) => e.preventDefault()} // Evita el comportamiento predeterminado del formulario
+          className='w-full flex justify-between'
+        >
           <input
             type='text'
             name='searchCategories'
@@ -76,6 +79,7 @@ export const SearchCategories = () => {
             onChange={handleSearchChange}
           />
           <button
+            type='button' // Asegúrate de que el botón no actúe como un botón de submit
             className='bg-amber-400 rounded-lg ml-2 py-2 px-4 font-bold'
             onClick={handleOpenFiltersModal}
           >
