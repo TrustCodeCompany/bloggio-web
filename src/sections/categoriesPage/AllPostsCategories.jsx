@@ -40,7 +40,7 @@ export const AllPostsCategories = () => {
         </div>
       )}
 
-      <section>
+      <section className='mb-12 lg:mb-32'>
         <h2 className='text-3xl font-bold lg:mt-16'>Todas Nuestras Categorias</h2>
         <div className='md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 lg:mb-16'>
           {category.map(({ categoryId, categoryImage, categoryName, categoryDesc }) => (
@@ -53,9 +53,6 @@ export const AllPostsCategories = () => {
             />
           ))}
         </div>
-        <section className='mb-12 lg:mb-24'>
-          <Pagination />
-        </section>
       </section>
     </>
   )

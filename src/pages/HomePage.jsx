@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { AllPosts, HeroHome, RecentPosts } from '../sections'
-import { ScrollToTop } from '../components/ScrollToTop' // Importa el componente
 
 export const HomePage = () => {
   return (
