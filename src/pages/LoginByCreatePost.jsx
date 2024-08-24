@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { MutatingDots } from 'react-loader-spinner'
 import { Link, useNavigate } from 'react-router-dom'
+import { Bounce, ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { fetchLogin } from './../api/api'
 import { useUserStore } from './../store/userStore'
 
@@ -16,6 +18,21 @@ export const LoginByCreatePost = () => {
   } = useForm()
 
   const { setUser } = useUserStore()
+
+  useEffect(() => {
+    const notify = () => toast('Tienes que haber iniciado sesión para poder crear un post', {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+      transition: Bounce
+    })
+    notify()
+  }, [])
 
   const onSubmit = async ({ username, password }) => {
     const dataFormated = { userNickname: username, userPassword: password }
@@ -44,6 +61,7 @@ export const LoginByCreatePost = () => {
 
   return (
     <>
+      <ToastContainer /> {/* Contenedor de Toastify */}
       {loading && (
         <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30'>
           <MutatingDots
