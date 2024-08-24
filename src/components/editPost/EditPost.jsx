@@ -74,29 +74,35 @@ export const EditPost = () => {
       postTitle: data.title,
       userId: id,
       mainImageUrl: imageFile ? '' : existingImage, // Usar la imagen existente si no se selecciona una nueva
-      published: 1
+      published: 1,
+      hasImageForUpload: false
     }
 
     const formData = new FormData()
-    formData.append(
-      'post',
-      new Blob([JSON.stringify(dataFormatted)], { type: 'application/json' })
-    )
     if (imageFile) {
       formData.append(
         'file',
         new Blob([imageFile], { type: 'application/octet-stream' })
       )
+      dataFormatted.hasImageForUpload = true
+    } else {
+      formData.append(
+        'file',
+        new Blob([existingImage], { type: 'application/octet-stream' })
+      )
+      dataFormatted.hasImageForUpload = false
     }
 
-    console.log(formData)
+    formData.append(
+      'post',
+      new Blob([JSON.stringify(dataFormatted)], { type: 'application/json' })
+    )
 
     try {
       await fetch(ENDPOINTS.editPost, {
         method: 'POST',
         body: formData
       })
-      console.log('recuperando data')
       setLoading(false)
       navigate(`/detail-post/${postId}`)
     } catch (error) {

@@ -34,7 +34,8 @@ export const LoginPage = () => {
         dataLogin.userNickname,
         dataLogin.userEmail,
         dataLogin.token,
-        dataLogin.userPhoto
+        dataLogin.userPhoto,
+        dataLogin.userShortBio
       )
       navigate('/', { replace: true })
     } finally {
