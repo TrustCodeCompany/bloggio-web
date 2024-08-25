@@ -64,5 +64,8 @@ export const ENDPOINTS = {
   deletePostById: `${API_BASE_URL}/Post`,
 
   // dar de baja una cuenta
-  disabledAccount: `${API_BASE_URL}/auth/disabled-account`
+  disabledAccount: `${API_BASE_URL}/auth/disabled-account`,
+
+  // enviar correo para cambio de clave
+  resetRequest: `${API_BASE_URL}/auth/reset-request`
 }
