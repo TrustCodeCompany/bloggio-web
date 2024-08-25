@@ -1,4 +1,3 @@
-// const API_BASE_URL = 'https://bloggio-api-ziu0.onrender.com'
 const API_BASE_URL = 'https://bloggio-api-clf6.onrender.com'
 // const API_BASE_URL = 'http://localhost:8085'
 
@@ -62,5 +61,8 @@ export const ENDPOINTS = {
   recommendedPost: `${API_BASE_URL}/Post/recommended-post`,
 
   // recuperar un post por id
-  deletePostById: `${API_BASE_URL}/Post`
+  deletePostById: `${API_BASE_URL}/Post`,
+
+  // dar de baja una cuenta
+  disabledAccount: `${API_BASE_URL}/auth/disabled-account`
 }
