@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://bloggio-api-clf6.onrender.com'
+const API_BASE_URL = 'https://bloggio-api-i9sz.onrender.com'
 // const API_BASE_URL = 'http://localhost:8085'
 
 export const ENDPOINTS = {
