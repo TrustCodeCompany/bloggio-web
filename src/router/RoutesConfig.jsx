@@ -4,9 +4,11 @@ import { useUserStore } from '../store/userStore'
 import {
   AboutUs,
   Categories,
+  ChangePassword,
   CocinaPage,
   Contac,
   CreatePost,
+  DeleteAccount,
   DeportesPage,
   DetailPost,
   HomePage,
@@ -47,10 +49,14 @@ export const RoutesConfig = () => {
         <Route path='/category-otros' element={<OtrosCategoriesPage />} />
         <Route path='/about' element={<AboutUs />} />
         <Route path='/contact' element={<Contac />} />
-        <Route path='/settings' element={<Settings />} />
         <Route path='/recovery-password' element={<RecoveryPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='*' element={<HomePage />} />
+
+        <Route path='/settings' element={<Settings />}>
+          <Route path='delete-account' element={<DeleteAccount />} />  {/* Sin barra inicial */}
+          <Route path='change-password' element={<ChangePassword />} /> {/* Sin barra inicial */}
+        </Route>
 
         <Route element={<ProtectedRoutes canActivate={logged} />}>
           <Route path='/create-post' element={<CreatePost />} />
