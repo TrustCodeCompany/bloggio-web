@@ -35,3 +35,5 @@ export { CreatePost } from './CreatePost'
 export { LoginPage } from './LoginPage'
 
 export { HomePage } from './HomePage'
+
+export { Settings } from './settings/Settings.jsx'

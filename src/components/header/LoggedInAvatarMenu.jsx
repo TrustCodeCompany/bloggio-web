@@ -68,7 +68,9 @@ export const LoggedInAvatarMenu = () => {
             </Link>
           </li>
           <li className='hover:text-secondary'>
-            <a href='#' onClick={handlePhotoClick}>Configuración</a>
+            <Link className='' to='/settings' onClick={handlePhotoClick}>
+              Configuracón
+            </Link>
           </li>
           <li className='text-orange-700 uppercase font-bold text-xs'>
             <Link
