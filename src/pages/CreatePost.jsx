@@ -24,13 +24,44 @@ export const CreatePost = () => {
 
   const {
     register,
-    handleSubmit,
     formState: { errors }
   } = useForm()
 
   const { getCategory } = usePostStore()
 
-  const onSubmit = async (data) => {
+  const onSubmitSave = async (data) => {
+    setLoading(true)
+
+    if (mainContent === null) {
+      ShowErrorAlert('Es obligatorio contenido en el cuerpo del post.')
+      return
+    }
+
+    data.mainContent = mainContent
+
+    let dataFormatted = {
+      postId: '',
+      categoryId: getCategory().category,
+      postContent: data.mainContent,
+      postDescription: data.description,
+      postPriority: 1,
+      postState: 0,
+      postTitle: data.title,
+      userId: id,
+      mainImageUrl: data.mainImageUrl || '',
+      published: 0
+    }
+    const formData = new FormData()
+    dataFormatted = JSON.stringify(dataFormatted)
+    formData.append('post', new Blob([dataFormatted], { type: 'application/json' }))
+    formData.append('file', new Blob([imageFile], { type: 'application/octet-stream' }))
+
+    await fetchCreatePost(formData)
+    setLoading(false)
+    navigate('/')
+  }
+
+  const onSubmitPublish = async (data) => {
     setLoading(true)
 
     if (mainContent === null) {
@@ -83,10 +114,10 @@ export const CreatePost = () => {
             CREAR POST
           </h1>
           <div className='flex flex-col md:flex-row justify-between'>
-            <form onSubmit={handleSubmit(onSubmit)} className='w-full md:w-[70%] mx-auto'>
+            <form className='w-full md:w-[70%] mx-auto'>
               {/* sección de botones de acción */}
               <div className='flex justify-end gap-8 text-xl bg-white rounded-md sticky top-0 py-4 right-0 z-10 md:text-base md:py-2'>
-                <Tooltip text='Eliminar'>
+                <Tooltip text='Limpiar'>
                   <button className='p-4 rounded-full border-red-500 border-2 hover:text-slate-200 hover:scale-110 transition-all'>
                     <FaTrashCan className='text-red-500' />
                   </button>
@@ -94,13 +125,18 @@ export const CreatePost = () => {
                 <Tooltip text='Guardar borrador'>
                   <button
                     className='p-4 rounded-full border-sky-500 border-2 hover:text-slate-200 hover:scale-110 transition-all'
-                    type='submit'
+                    type='button'
+                    onClick={onSubmitSave}
                   >
                     <IoSave className='text-sky-500' />
                   </button>
                 </Tooltip>
                 <Tooltip text='Publicar post'>
-                  <button className='p-4 rounded-full border-green-600 border-2 hover:text-slate-200 hover:scale-110 transition-all'>
+                  <button
+                    className='p-4 rounded-full border-green-600 border-2 hover:text-slate-200 hover:scale-110 transition-all'
+                    type='button'
+                    onClick={onSubmitPublish}
+                  >
                     <FaUpload className='text-green-600' />
                   </button>
                 </Tooltip>
