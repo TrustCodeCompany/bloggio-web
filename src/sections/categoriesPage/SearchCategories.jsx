@@ -4,7 +4,7 @@ import { ResultFindCategories } from './ResultFindCategories'
 import { ENDPOINTS } from '../../api/apiEndpoints.js'
 
 export const SearchCategories = () => {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState(undefined)
   const [posts, setPosts] = useState([])
   const [showFiltersModal, setShowFiltersModal] = useState(false)
   const [startDate, setStartDate] = useState('')
@@ -12,13 +12,15 @@ export const SearchCategories = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      if (searchTerm.trim() === '' && !startDate && !endDate) {
-        setPosts([])
+      // Si el término de búsqueda está vacío, no se realiza ninguna solicitud
+      if (searchTerm === '' && !startDate && !endDate) {
+        // setPosts([]) // Limpia los posts si no hay búsqueda ni fechas
+        setSearchTerm(undefined)
         return
       }
 
       try {
-        const response = await fetch(ENDPOINTS.getAllPostByDeportesCategory, {
+        const response = await fetch(ENDPOINTS.getAllPostByPostTitle, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -43,6 +45,7 @@ export const SearchCategories = () => {
         setPosts(data.data)
       } catch (error) {
         console.error('Error fetching posts:', error)
+        setPosts([]) // Limpia los posts en caso de error
       }
     }
 
@@ -50,7 +53,13 @@ export const SearchCategories = () => {
   }, [searchTerm, startDate, endDate])
 
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value)
+    const value = e.target.value
+    setSearchTerm(value)
+
+    // Si el input está vacío, limpiar los resultados
+    if (value.trim() === '') {
+      setPosts([])
+    }
   }
 
   const handleOpenFiltersModal = () => {

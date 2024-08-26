@@ -18,11 +18,8 @@ export const ENDPOINTS = {
   // crear un nuevo post
   createPost: `${API_BASE_URL}/Post/Create-v2`,
 
-  // obtener todos los posts de la categoría Viajes, usando paginación
-  getAllPostByViajesCategory: `${API_BASE_URL}/Post/find-all-by-filters`,
-
   // obtener todos los posts de la categoría Salud, usando paginación
-  getAllPostBySaludCategory: `${API_BASE_URL}/Post/find-all-by-filters`,
+  getAllPostByPostTitle: `${API_BASE_URL}/Post/find-all-by-filters`,
 
   // obtener todos los posts de la categoría Cocina, usando paginacion
   getAllPostByCocinaCategory: `${API_BASE_URL}/Post/find-all-by-filters`,
