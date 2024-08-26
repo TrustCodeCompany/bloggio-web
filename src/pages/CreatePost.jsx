@@ -24,7 +24,8 @@ export const CreatePost = () => {
 
   const {
     register,
-    formState: { errors }
+    formState: { errors },
+    getValues
   } = useForm()
 
   const { getCategory } = usePostStore()
@@ -43,10 +44,10 @@ export const CreatePost = () => {
       postId: '',
       categoryId: getCategory().category,
       postContent: data.mainContent,
-      postDescription: data.description,
+      postDescription: getValues('description'),
       postPriority: 1,
       postState: 0,
-      postTitle: data.title,
+      postTitle: getValues('title'),
       userId: id,
       mainImageUrl: data.mainImageUrl || '',
       published: 0
@@ -75,10 +76,10 @@ export const CreatePost = () => {
       postId: '',
       categoryId: getCategory().category,
       postContent: data.mainContent,
-      postDescription: data.description,
+      postDescription: getValues('description'),
       postPriority: 1,
       postState: 1,
-      postTitle: data.title,
+      postTitle: getValues('title'),
       userId: id,
       mainImageUrl: data.mainImageUrl || '',
       published: 1
