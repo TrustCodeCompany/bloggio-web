@@ -1,62 +1,80 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { ModalFindCategoriesByDate } from './ModalFindCategoriesByDate'
 import { ResultFindCategories } from './ResultFindCategories'
 import { ENDPOINTS } from '../../api/apiEndpoints.js'
 
+// Función para manejar el debounce
+const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value)
+    }, delay)
+
+    return () => {
+      clearTimeout(handler)
+    }
+  }, [value, delay])
+
+  return debouncedValue
+}
+
 export const SearchCategories = () => {
-  const [searchTerm, setSearchTerm] = useState(undefined)
+  const [searchTerm, setSearchTerm] = useState('')
   const [posts, setPosts] = useState([])
   const [showFiltersModal, setShowFiltersModal] = useState(false)
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      // Si el término de búsqueda está vacío, no se realiza ninguna solicitud
-      if (searchTerm === '' && !startDate && !endDate) {
-        // setPosts([]) // Limpia los posts si no hay búsqueda ni fechas
-        setSearchTerm(undefined)
-        return
-      }
+  // Implementando debounce
+  const debouncedSearchTerm = useDebounce(searchTerm, 500)
+  const debouncedStartDate = useDebounce(startDate, 500)
+  const debouncedEndDate = useDebounce(endDate, 500)
 
-      try {
-        const response = await fetch(ENDPOINTS.getAllPostByPostTitle, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            categoryName: '',
-            date_end: endDate,
-            date_start: startDate,
-            limit: 20,
-            offset: 1,
-            postTitle: searchTerm
-          })
-        })
-
-        if (!response.ok) {
-          console.error('Network response was not ok:', response.statusText)
-          throw new Error('Network response was not ok')
-        }
-
-        const data = await response.json()
-        console.log('Data received from API:', data)
-        setPosts(data.data)
-      } catch (error) {
-        console.error('Error fetching posts:', error)
-        setPosts([]) // Limpia los posts en caso de error
-      }
+  const fetchPosts = useCallback(async () => {
+    if (!debouncedSearchTerm && !debouncedStartDate && !debouncedEndDate) {
+      return
     }
 
+    try {
+      const response = await fetch(ENDPOINTS.getAllPostByPostTitle, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          categoryName: '',
+          date_end: debouncedEndDate, // Añadir fecha de fin si existe
+          date_start: debouncedStartDate, // Añadir fecha de inicio si existe
+          limit: 20,
+          offset: 1,
+          postTitle: debouncedSearchTerm || '' // Asegurarse de que postTitle sea una cadena
+        })
+      })
+
+      if (!response.ok) {
+        console.error('Network response was not ok:', response.statusText)
+        throw new Error('Network response was not ok')
+      }
+
+      const data = await response.json()
+      console.log('Data received from API:', data)
+      setPosts(data.data)
+    } catch (error) {
+      console.error('Error fetching posts:', error)
+      setPosts([]) // Limpia los posts en caso de error
+    }
+  }, [debouncedSearchTerm, debouncedStartDate, debouncedEndDate])
+
+  useEffect(() => {
     fetchPosts()
-  }, [searchTerm, startDate, endDate])
+  }, [fetchPosts])
 
   const handleSearchChange = (e) => {
     const value = e.target.value
     setSearchTerm(value)
 
-    // Si el input está vacío, limpiar los resultados
     if (value.trim() === '') {
       setPosts([])
     }
@@ -97,7 +115,6 @@ export const SearchCategories = () => {
         </form>
       </section>
 
-      {/* Ventana modal de filtros */}
       {showFiltersModal && (
         <ModalFindCategoriesByDate
           setShowFiltersModal={setShowFiltersModal}
@@ -105,7 +122,6 @@ export const SearchCategories = () => {
         />
       )}
 
-      {/* Mostrar resultados de búsqueda */}
       {posts.length > 0
         ? (
           <ResultFindCategories posts={posts} />
