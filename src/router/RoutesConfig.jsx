@@ -26,6 +26,8 @@ import {
   ViajesPage
 } from './../pages'
 import { ProtectedRoutes } from './../utils/ProtectedRoutes'
+import { MyPosts } from '../pages/MyPosts.jsx'
+import { MyPostsDraft } from '../pages/MyPostsDraft.jsx'
 
 export const RoutesConfig = () => {
   const { logged } = useUserStore()
@@ -37,7 +39,7 @@ export const RoutesConfig = () => {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/login-by-createPost' element={<LoginByCreatePost />} />
         <Route path='/create-user' element={<SignUp />} />
-        <Route path='/my-profile' element={<MyProfile />} />
+        {/* <Route path='/my-profile' element={<MyProfile />} /> */}
         <Route path='/detail-post/:id' element={<DetailPost />} />
         <Route path='/categories' element={<Categories />} />
         <Route path='/category-viajes' element={<ViajesPage />} />
@@ -56,6 +58,11 @@ export const RoutesConfig = () => {
         <Route path='/settings' element={<Settings />}>
           <Route path='delete-account' element={<DeleteAccount />} />  {/* Sin barra inicial */}
           <Route path='change-password' element={<ChangePassword />} /> {/* Sin barra inicial */}
+        </Route>
+
+        <Route path='/my-profile' element={<MyProfile />}>
+          <Route path='my-posts' element={<MyPosts />} />  {/* Sin barra inicial */}
+          <Route path='my-posts-draft' element={<MyPostsDraft />} /> {/* Sin barra inicial */}
         </Route>
 
         <Route element={<ProtectedRoutes canActivate={logged} />}>
