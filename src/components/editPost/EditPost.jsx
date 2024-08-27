@@ -25,9 +25,9 @@ export const EditPost = () => {
 
   const {
     register,
-    handleSubmit,
     setValue,
-    formState: { errors }
+    formState: { errors },
+    getValues
   } = useForm()
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export const EditPost = () => {
     fetchPostData()
   }, [postId, setValue])
 
-  const onSubmit = async data => {
+  const onSubmitSave = async data => {
     setLoading(true)
 
     if (mainContent === null) {
@@ -68,10 +68,68 @@ export const EditPost = () => {
       postId,
       categoryId: data.category,
       postContent: data.mainContent,
-      postDescription: data.description,
+      postDescription: getValues('description'),
+      postPriority: 1,
+      postState: 0,
+      postTitle: getValues('title'),
+      userId: id,
+      mainImageUrl: imageFile ? '' : existingImage, // Usar la imagen existente si no se selecciona una nueva
+      published: 0,
+      hasImageForUpload: false
+    }
+
+    const formData = new FormData()
+    if (imageFile) {
+      formData.append(
+        'file',
+        new Blob([imageFile], { type: 'application/octet-stream' })
+      )
+      dataFormatted.hasImageForUpload = true
+    } else {
+      formData.append(
+        'file',
+        new Blob([existingImage], { type: 'application/octet-stream' })
+      )
+      dataFormatted.hasImageForUpload = false
+    }
+
+    formData.append(
+      'post',
+      new Blob([JSON.stringify(dataFormatted)], { type: 'application/json' })
+    )
+
+    try {
+      await fetch(ENDPOINTS.editPost, {
+        method: 'POST',
+        body: formData
+      })
+      setLoading(false)
+      navigate(`/detail-post/${postId}`)
+    } catch (error) {
+      console.error('Error updating post:', error)
+      ShowErrorAlert('Error al actualizar el post. Intente nuevamente.')
+      setLoading(false)
+    }
+  }
+
+  const onSubmitPublish = async data => {
+    setLoading(true)
+
+    if (mainContent === null) {
+      ShowErrorAlert('Es obligatorio contenido en el cuerpo del post.')
+      return
+    }
+
+    data.mainContent = mainContent
+
+    const dataFormatted = {
+      postId,
+      categoryId: data.category,
+      postContent: data.mainContent,
+      postDescription: getValues('description'),
       postPriority: 1,
       postState: 1,
-      postTitle: data.title,
+      postTitle: getValues('title'),
       userId: id,
       mainImageUrl: imageFile ? '' : existingImage, // Usar la imagen existente si no se selecciona una nueva
       published: 1,
@@ -133,25 +191,24 @@ export const EditPost = () => {
         </h1>
         <div className='flex flex-col md:flex-row justify-between'>
           <form
-            onSubmit={handleSubmit(onSubmit)}
             className='w-full md:w-[70%] mx-auto'
           >
             <div className='flex justify-end gap-8 text-xl bg-white rounded-md sticky top-0 py-4 right-0 z-10 md:text-base md:py-2'>
-              <Tooltip text='Eliminar'>
-                <button className='p-4 rounded-full border-red-500 border-2 hover:text-slate-200 hover:scale-110 transition-all'>
-                  <FaTrashCan className='text-red-500' />
-                </button>
-              </Tooltip>
               <Tooltip text='Guardar cambios'>
                 <button
                   className='p-4 rounded-full border-sky-500 border-2 hover:text-slate-200 hover:scale-110 transition-all'
-                  type='submit'
+                  type='button'
+                  onClick={onSubmitSave}
                 >
                   <IoSave className='text-sky-500' />
                 </button>
               </Tooltip>
               <Tooltip text='Publicar cambios'>
-                <button className='p-4 rounded-full border-green-600 border-2 hover:text-slate-200 hover:scale-110 transition-all'>
+                <button
+                  className='p-4 rounded-full border-green-600 border-2 hover:text-slate-200 hover:scale-110 transition-all'
+                  type='button'
+                  onClick={onSubmitPublish}
+                >
                   <FaUpload className='text-green-600' />
                 </button>
               </Tooltip>

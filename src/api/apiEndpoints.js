@@ -64,5 +64,9 @@ export const ENDPOINTS = {
   disabledAccount: `${API_BASE_URL}/auth/disabled-account`,
 
   // enviar correo para cambio de clave
-  resetRequest: `${API_BASE_URL}/auth/reset-request`
+  resetRequest: `${API_BASE_URL}/auth/reset-request`,
+
+  // Post/get-posts-draft-by-user/
+  getPostsDraftByUser: `${API_BASE_URL}/Post/get-posts-draft-by-user`
+
 }
