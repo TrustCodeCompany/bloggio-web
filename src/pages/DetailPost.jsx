@@ -20,7 +20,6 @@ export const DetailPost = () => {
       try {
         const response = await fetch(ENDPOINTS.findPostById + '/' + id)
         const data = await response.json()
-        console.log(data)
         setPost(data)
         setLoading(false)
       } catch (error) {
