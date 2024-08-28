@@ -11,12 +11,12 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
   const [replyContent, setReplyContent] = useState('')
 
   const { id, userName } = useUserStore()
-  console.log(userName)
 
   const fetchComments = useCallback(async () => {
     try {
       const response = await fetch(ENDPOINTS.commentByPostId + '?postId=' + postId)
       const data = await response.json()
+      console.log('data comments ', data)
       setComments(data)
     } catch (error) {
       console.error('Error fetching comments:', error)
@@ -127,11 +127,12 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
                       >
                         Responder
                       </button>
-                      {replyingToCommentId === comment.commentId && (
-                        <div className='reply-section mt-2'>
+                      {console.log(replyingToCommentId === comment.commentId)}
+                      {comment.commentsReply.map((commentReply, indexReply) => (
+                        <div key={indexReply} className='reply-section mt-2'>
                           <textarea
                             placeholder='Escribe una respuesta...'
-                            value={replyContent}
+                            value={commentReply.commentContent}
                             onChange={(e) => setReplyContent(e.target.value)}
                             className='w-full rounded-lg border border-gray-400 p-2 text-sm lg:text-xs'
                           />
@@ -142,7 +143,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
                             Enviar respuesta
                           </button>
                         </div>
-                      )}
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -159,7 +160,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
             onChange={(e) => setNewComment(e.target.value)}
             className='w-full rounded-lg border border-gray-400 p-2 text-sm lg:text-xs mt-4'
           />
-          {console.log(newComment)}
+          {/* console.log(newComment) */}
           <button
             className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-4 px-4 font-bold'
             onClick={handleCommentSubmit}

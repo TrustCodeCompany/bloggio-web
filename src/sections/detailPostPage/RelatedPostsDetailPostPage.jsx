@@ -10,14 +10,10 @@ export const RelatedPostsDetailPostPage = ({ post }) => {
   const [error, setError] = useState(null)
   const { userName, userAvatar } = useUserStore()
 
-  console.log(post)
-
   useEffect(() => {
     const fetchRelatedPosts = async () => {
       try {
         const response = await fetch(ENDPOINTS.recommendedPost + '?category-name=' + post.categoryDesc + '&user-id=' + post.user.userId)
-
-        console.log(response)
 
         if (!response.ok) {
           throw new Error('Network response was not ok')
