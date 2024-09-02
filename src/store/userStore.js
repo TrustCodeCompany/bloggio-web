@@ -12,7 +12,7 @@ export const useUserStore = create(
       logged: false,
       userShortBio: null,
       userAvatar: null,
-      reactiveAccount: false,
+      reactiveAccount: false, // Mantener consistente el nombre
       role: [],
 
       setLogged: () =>
@@ -29,7 +29,7 @@ export const useUserStore = create(
           logged: true,
           userAvatar: avatar,
           userShortBio: bio,
-          userReactiveAccount: reactiveAccount
+          reactiveAccount // Mantener consistente el nombre
         })),
 
       setUserAvatar: (avatar) =>
@@ -45,7 +45,8 @@ export const useUserStore = create(
           token: null,
           logged: false,
           userAvatar: null,
-          userShortBio: null
+          userShortBio: null,
+          reactiveAccount: false // Restablecer al cerrar sesión
         }))
     }),
     {
@@ -57,7 +58,7 @@ export const useUserStore = create(
         logged: state.logged,
         userAvatar: state.userAvatar,
         userShortBio: state.userShortBio,
-        userReactiveAccount: state.userReactiveAccount
+        reactiveAccount: state.reactiveAccount // Incluir aquí también
       })
     }
   )

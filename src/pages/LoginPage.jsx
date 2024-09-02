@@ -29,6 +29,7 @@ export const LoginPage = () => {
         throw new Error('Hubo un problema con la petición: ' + dataLogin.status)
       }
 
+      // Guardar los datos del usuario en el store y en localStorage
       setUser(
         dataLogin.userId,
         dataLogin.userNickname,
@@ -38,6 +39,17 @@ export const LoginPage = () => {
         dataLogin.userShortBio,
         dataLogin.reactiveAccount
       )
+
+      // Obtener el userState desde localStorage
+      const userState = JSON.parse(localStorage.getItem('userState')) || {}
+
+      // Cambiar el valor de userReactiveAccount a false
+      userState.userReactiveAccount = false
+
+      // Guardar nuevamente en el localStorage
+      localStorage.setItem('userState', JSON.stringify(userState))
+
+      // Redirigir a la página de inicio
       navigate('/', { replace: true })
     } finally {
       setLoading(false) // Ocultar spinner
