@@ -34,7 +34,7 @@ export const RoutesConfig = () => {
   return (
 
     <Routes>
-      <Route path='/reset-password/?token' element={<ResetPassword />} />
+
       <Route element={<Layout />}>
         <Route path='/' element={<HomePage />} />
         <Route path='/home' element={<HomePage />} />
@@ -54,6 +54,7 @@ export const RoutesConfig = () => {
         <Route path='/about' element={<AboutUs />} />
         <Route path='/contact' element={<Contac />} />
         <Route path='/recovery-password' element={<RecoveryPassword />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
 
         <Route path='*' element={<HomePage />} />
 
