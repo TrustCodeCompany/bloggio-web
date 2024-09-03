@@ -1,31 +1,36 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export const ResetPassword = () => {
-  // Estado para las contraseñas y mensajes
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
+  const [token, setToken] = useState('')
 
-  // Maneja el cambio en el campo de nueva contraseña
+  // Extrae el token de la URL
+  const location = useLocation()
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search)
+    setToken(queryParams.get('token') || '')
+  }, [location])
+
   const handleNewPasswordChange = (e) => {
     setNewPassword(e.target.value)
-    setError('') // Limpia el error cuando el usuario comienza a escribir
-    setSuccessMessage('') // Limpia el mensaje de éxito
+    setError('')
+    setSuccessMessage('')
   }
 
-  // Maneja el cambio en el campo de confirmación de contraseña
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value)
-    setError('') // Limpia el error cuando el usuario comienza a escribir
-    setSuccessMessage('') // Limpia el mensaje de éxito
+    setError('')
+    setSuccessMessage('')
   }
 
-  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // Validación de las contraseñas
     if (newPassword.length < 6) {
       setError('La nueva contraseña debe tener al menos 6 caracteres.')
       return
@@ -37,22 +42,19 @@ export const ResetPassword = () => {
     }
 
     try {
-      // Reemplaza con la URL de tu endpoint para restablecer la contraseña
-      const response = await fetch('https://tu-backend-api.com/reset-password', {
+      const response = await fetch('https://bloggio-api-1nue.onrender.com/auth/reset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ newPassword })
+        body: JSON.stringify({ newPassword, token })
       })
 
       const result = await response.json()
 
       if (response.ok) {
-        // Muestra un mensaje de éxito si la contraseña se restableció correctamente
         setSuccessMessage(result.message || 'Su contraseña ha sido restablecida con éxito.')
       } else {
-        // Muestra un mensaje de error en caso de que haya algún problema
         setError(result.message || 'Hubo un problema al restablecer la contraseña.')
       }
     } catch (error) {
@@ -60,7 +62,6 @@ export const ResetPassword = () => {
       setError('Hubo un problema al enviar la solicitud. Inténtelo de nuevo más tarde.')
     }
 
-    // Limpia los campos después del envío
     setNewPassword('')
     setConfirmPassword('')
   }
