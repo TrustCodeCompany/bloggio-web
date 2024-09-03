@@ -1,10 +1,10 @@
+export { ResetPassword } from './ResetPassword'
+
 export { DeleteAccount } from './settings/DeleteAccount.jsx'
 
 export { ChangePassword } from './settings/ChangePassword.jsx'
 
 export { LoginByCreatePost } from './LoginByCreatePost'
-
-export { ResetPassword } from './ResetPassword'
 
 export { RecoveryPassword } from './RecoveryPassword'
 
