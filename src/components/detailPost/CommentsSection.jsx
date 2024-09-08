@@ -111,31 +111,28 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
         <h3 className='font-bold'>COMENTARIOS :</h3>
         {comments.length > 0
           ? (
-              comments.map((comment, index) => (
-                <div key={index} className='comment'>
-                  <div className='flex items-center gap-2 mb-3 p-2'>
-                    <img
-                      src={comment.usersDTO?.userPhoto || userAvatar}
-                      className='author-photo w-10 h-10 rounded-full p-1'
-                    />
-                    <div className='w-full'>
-                      <span className='font-bold'>{comment.usersDTO?.userNickname || 'Anónimo'}</span>
-                      <p className='bg-slate-300 w-full rounded-lg p-2 text-sm lg:text-xs'>{comment.commentContent}</p>
-                      <button
-                        className='text-blue-500 mt-2 block'
-                        onClick={() => setReplyingToCommentId(comment.commentId)}
-                      >
-                        Responder
-                      </button>
-                      {console.log(replyingToCommentId === comment.commentId)}
-                      {comment.commentsReply.map((commentReply, indexReply) => (
+            comments.map((comment, index) => (
+              <div key={index} className='comment'>
+                <div className='flex items-center gap-2 mb-3 p-2'>
+                  <img
+                    src={comment.usersDTO?.userPhoto || userAvatar}
+                    className='author-photo w-10 h-10 rounded-full p-1'
+                  />
+                  <div className='w-full'>
+                    <span className='font-bold'>{comment.usersDTO?.userNickname || 'Anónimo'}</span>
+                    <p className='bg-slate-300 w-full rounded-lg p-2 text-sm lg:text-xs'>{comment.commentContent}</p>
+                    <button
+                      className='text-blue-500 mt-2 block'
+                      onClick={() => setReplyingToCommentId(comment.commentId)}
+                    >
+                      Responder
+                    </button>
+                    {console.log(replyingToCommentId === comment.commentId)}
+
+                    {comment.commentsReply && comment.commentsReply.length > 0 && (
+                      comment.commentsReply.map((commentReply, indexReply) => (
                         <div key={indexReply} className='reply-section mt-2'>
-                          <textarea
-                            placeholder='Escribe una respuesta...'
-                            value={commentReply.commentContent}
-                            onChange={(e) => setReplyContent(e.target.value)}
-                            className='w-full rounded-lg border border-gray-400 p-2 text-sm lg:text-xs'
-                          />
+                          <p>{commentReply.commentContent}</p>
                           <button
                             className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-2'
                             onClick={() => handleReplySubmit(comment.commentId)}
@@ -143,15 +140,17 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
                             Enviar respuesta
                           </button>
                         </div>
-                      ))}
-                    </div>
+                      ))
+                    )}
+
                   </div>
                 </div>
-              ))
-            )
+              </div>
+            ))
+          )
           : (
             <p>No hay comentarios aún.</p>
-            )}
+          )}
         <div className='new-comment'>
           <textarea
             placeholder='Escribe un comentario...'
