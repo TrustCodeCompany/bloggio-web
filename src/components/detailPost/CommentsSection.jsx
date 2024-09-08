@@ -123,10 +123,12 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
                     <p className='bg-slate-300 w-full rounded-lg p-2 text-sm lg:text-xs'>{comment.commentContent}</p>
                     <button
                       className='text-blue-500 mt-2 block'
-                      onClick={() => setReplyingToCommentId(comment.commentId)}
+                      // onClick={() => setReplyingToCommentId(comment.commentId)}
+                      onClick={console.log('click en el boton de respuesta')}
                     >
                       Responder
                     </button>
+
                     {console.log(replyingToCommentId === comment.commentId)}
 
                     {comment.commentsReply && comment.commentsReply.length > 0 && (
@@ -134,7 +136,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
                         <div key={indexReply} className='reply-section mt-2'>
                           <p>{commentReply.commentContent}</p>
                           <button
-                            className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-2'
+                            className='text-blue-500 mt-2 block'
                             onClick={() => handleReplySubmit(comment.commentId)}
                           >
                             Enviar respuesta
@@ -159,7 +161,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
             onChange={(e) => setNewComment(e.target.value)}
             className='w-full rounded-lg border border-gray-400 p-2 text-sm lg:text-xs mt-4'
           />
-          {/* console.log(newComment) */}
+
           <button
             className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-4 px-4 font-bold'
             onClick={handleCommentSubmit}
