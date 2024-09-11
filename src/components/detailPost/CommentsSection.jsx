@@ -135,7 +135,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
 
                     {comment.commentsReply && comment.commentsReply.length > 0 && (
                       comment.commentsReply.map((commentReply, indexReply) => (
-                        <div key={indexReply} className='reply-section mt-2'>
+                        <div key={indexReply} className='reply-section mt-2 bg-slate-300 rounded-lg p-2 ml-4 '>
                           <p>{commentReply.commentContent}</p>
                         </div>
                       ))
