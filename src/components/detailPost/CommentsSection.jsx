@@ -119,14 +119,17 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
                     className='author-photo w-10 h-10 rounded-full p-1'
                   />
                   <div className='w-full'>
-                    <span className='font-bold'>{comment.usersDTO?.userNickname || 'Anónimo'}</span>
+                    <span className='font-bold'>{comment.usersDTO?.userNickname}</span>
                     <p className='bg-slate-300 w-full rounded-lg p-2 text-sm lg:text-xs'>{comment.commentContent}</p>
-                    <button
-                      className='text-blue-500 mt-2 block'
-                      onClick={() => setReplyingToCommentId(comment.commentId)}
-                    >
-                      Responder
-                    </button>
+                    {/* Mostrar solo si el usuario está logueado */}
+                    {logged && (
+                      <button
+                        className='text-blue-500 mt-2 block'
+                        onClick={() => setReplyingToCommentId(comment.commentId)}
+                      >
+                        Responder
+                      </button>
+                    )}
 
                     {console.log(replyingToCommentId === comment.commentId)}
 
