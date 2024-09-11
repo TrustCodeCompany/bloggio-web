@@ -10,7 +10,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
   const [replyingToCommentId, setReplyingToCommentId] = useState(null)
   const [replyContent, setReplyContent] = useState('')
 
-  const { id, userName } = useUserStore()
+  const { id, logged } = useUserStore()
 
   const fetchComments = useCallback(async () => {
     try {
@@ -63,8 +63,8 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
   const handleReplySubmit = async (parentCommentId) => {
     const dataFormatted = {
       commentContent: replyContent,
-      commentId: '', // En este caso, este es el ID del nuevo comentario que se está creando, normalmente se deja vacío para el backend.
-      commentIdReply: parentCommentId, // ID del comentario al que se está respondiendo.
+      commentId: '',
+      commentIdReply: parentCommentId,
       commentLikes: 0,
       commentState: 1,
       commentTimestampCreate: null,
@@ -123,8 +123,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
                     <p className='bg-slate-300 w-full rounded-lg p-2 text-sm lg:text-xs'>{comment.commentContent}</p>
                     <button
                       className='text-blue-500 mt-2 block'
-                      // onClick={() => setReplyingToCommentId(comment.commentId)}
-                      onClick={console.log('click en el boton de respuesta')}
+                      onClick={() => setReplyingToCommentId(comment.commentId)}
                     >
                       Responder
                     </button>
@@ -135,12 +134,6 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
                       comment.commentsReply.map((commentReply, indexReply) => (
                         <div key={indexReply} className='reply-section mt-2'>
                           <p>{commentReply.commentContent}</p>
-                          <button
-                            className='text-blue-500 mt-2 block'
-                            onClick={() => handleReplySubmit(comment.commentId)}
-                          >
-                            Enviar respuesta
-                          </button>
                         </div>
                       ))
                     )}
@@ -153,22 +146,26 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
           : (
             <p>No hay comentarios aún.</p>
           )}
-        <div className='new-comment'>
-          <textarea
-            placeholder='Escribe un comentario...'
-            id='new-comment'
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            className='w-full rounded-lg border border-gray-400 p-2 text-sm lg:text-xs mt-4'
-          />
 
-          <button
-            className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-4 px-4 font-bold'
-            onClick={handleCommentSubmit}
-          >
-            Publicar
-          </button>
-        </div>
+        {/* Mostrar solo si el usuario está logueado */}
+        {logged && (
+          <div className='new-comment'>
+            <textarea
+              placeholder='Escribe un comentario...'
+              id='new-comment'
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              className='w-full rounded-lg border border-gray-400 p-2 text-sm lg:text-xs mt-4'
+            />
+
+            <button
+              className='bg-secondary text-white rounded-lg p-2 text-sm lg:text-xs mt-4 px-4 font-bold'
+              onClick={handleCommentSubmit}
+            >
+              Publicar
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
