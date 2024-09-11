@@ -113,7 +113,7 @@ export const CommentsSection = ({ author, category, date, postId, imgUser }) => 
           ? (
             comments.map((comment, index) => (
               <div key={index} className='comment'>
-                <div className='flex items-center gap-2 mb-3 p-2'>
+                <div className='flex gap-2 mb-3 p-2'>
                   <img
                     src={comment.usersDTO?.userPhoto || userAvatar}
                     className='author-photo w-10 h-10 rounded-full p-1'
