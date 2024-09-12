@@ -21,8 +21,7 @@ export const Navbar = () => {
   return (
     <>
       <ul
-        className={`bg-amber-400 h-[100vh] w-[100vw] right-full absolute top-0 mt-0 pl-0 transition-all z-30 md:right-0 md:bg-white md:static md:h-auto ${
-          menuClicked ? '!right-0' : ''}`}
+        className={`bg-amber-400 h-[100vh] w-[100vw] right-full absolute top-0 mt-0 pl-0 transition-all z-30 md:right-0 md:bg-bgColor md:static md:h-auto ${menuClicked ? '!right-0' : ''} dark:bg-dark-bgColor dark:text-dark-textColor`}
       >
         <div className='flex justify-end'>
           <div className='p-6 md:hidden' onClick={handleClick}>
@@ -47,9 +46,8 @@ export const Navbar = () => {
 
       <div>
         <img
-          className={`${
-            menuClicked ? '' : ''
-          } w-10 h-10 cursor-pointer sm:hidden`}
+          className={`${menuClicked ? '' : ''
+            } w-10 h-10 cursor-pointer sm:hidden`}
           src={burgerMenu}
           onClick={handleClick}
           alt='icon-hamburger'
