@@ -14,7 +14,7 @@ export const Footer = () => {
         <div className='md:flex md:justify-between lg:w-[75%]'>
           <div className='flex justify-around mb-10 md:w-1/2'>
             <ul className=''>
-              <li className='text-slate-900 font-bold text-base underline mb-4'>Empresa</li>
+              <li className='text-slate-900 font-bold text-base underline mb-4 dark:text-dark-accent'>Empresa</li>
               <Link
                 to='/about'
                 className='text-sm hover:text-secondary md:hover:text-secondary'
@@ -60,7 +60,7 @@ export const Footer = () => {
         </div>
       </section>
 
-      <hr />
+      <hr className=' border-slate-300 dark:border-dark-accent/15' />
 
       <FooterCopyright />
     </div>
