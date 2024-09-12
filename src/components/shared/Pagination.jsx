@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { RiArrowLeftLine, RiArrowRightLine } from 'react-icons/ri'
 
 export const Pagination = ({ currentPage, totalPages, onPageChange }) => {
@@ -39,18 +40,18 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <ul className='pagination flex justify-between items-center text-sm'>
-      <li className='page-item border border-slate-500 rounded-full p-2'>
+      <li className='page-item border border-slate-500 rounded-full p-2 hover:scale-105 text-bgDarkGrayColor dark:text-dark-textColor dark:bg-bgDarkGrayColor dark:hover:bg-bgColor hover:shadow-md  dark:hover:text-textColor  transition-all'>
         <a className='page-link md:flex items-center gap-2' href='#' onClick={handlePrevious}>
           <RiArrowLeftLine />
-          <span className='hidden md:block px-2'> Anterior </span>
+          <span className='hidden md:block px-2'> Página Anterior </span>
         </a>
       </li>
-      <div className='flex gap-2 md:gap-4 lg:gap-6 items-center'>
+      {/* <div className='flex gap-2 md:gap-4 lg:gap-6 items-center'>
         {renderPageNumbers()}
-      </div>
-      <li className='page-item border border-slate-500 rounded-full p-2'>
+      </div> */}
+      <li className='page-item border border-slate-500 rounded-full p-2 hover:scale-105 text-bgDarkGrayColor  dark:text-dark-textColor dark:bg-bgDarkGrayColor dark:hover:bg-bgColor hover:shadow-md  dark:hover:text-textColor  transition-all'>
         <a className='page-link md:flex items-center gap-2' href='#' onClick={handleNext}>
-          <span className='hidden md:block px-2'> Siguiente </span>
+          <span className='hidden md:block px-2'> Página Siguiente </span>
           <RiArrowRightLine />
         </a>
       </li>
