@@ -6,7 +6,7 @@ export const Footer = () => {
     <div className='text-sm mt-24'>
       <section className='lg:flex lg:mb-11'>
         <div className='flex gap-4 mb-12 md:items-center md:justify-center lg:flex-col lg:items-start lg:basis-[25%]'>
-          <h3 className='text-3xl font-bold'>Bloggio</h3>
+          <Link to='/' className='text-3xl font-bold dark:text-dark-accent'>Bloggio</Link>
           <p className='text-end lg:text-start'>
             Un espacio donde puedes expresar tus ideas con libertad
           </p>
