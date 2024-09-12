@@ -22,11 +22,11 @@ export const HeroHome = () => {
   }, [userReactiveAccount])
 
   return (
-    <div className='mb-28'>
+    <div className='mb-28 dark:bg-dark-bgColor dark:text-dark-textColor'>
       <h1 className='text-2xl md:text-3xl font-bold font-Oswald text-center mx-auto mt-28'>
         Blog con Libertad: Historias y entrevistas
       </h1>
-      <p className='text-gray-700 text-sm text-center mb-4'>
+      <p className='text-textGrayColor text-base text-center mb-4 dark:text-dark-accent '>
         Suscríbete para aprender acerca de nuevos productos y últimas
         tecnologías
       </p>
@@ -36,9 +36,9 @@ export const HeroHome = () => {
         </p>
         <Link
           to={logged ? '/create-post' : '/login-by-createPost'}
-          className='flex justify-center items-center font-bold hover:text-slate-900 hover:bg-orange-400 py-2 px-4 bg-slate-900 text-slate-100 transition-all text-xs rounded-xl shadow-xl'
+          className='flex justify-center items-center font-bold hover:text-slate-900 hover:bg-orange-400 py-2 px-4 bg-dark-bgColor text-dark-textColor dark:bg-bgColor dark:text-textColor dark:hover:bg-dark-accent dark:hover:text-textColor transition-all text-xs rounded-xl shadow-xl'
         >
-          Crear Post
+          CREAR POST
         </Link>
       </div>
       {/* Añadir ToastContainer para mostrar los mensajes */}

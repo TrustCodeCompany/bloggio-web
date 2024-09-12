@@ -32,7 +32,10 @@ export default {
         accent: '#f4f4f5',
         // textColor: '#333333',
         textColor: '#121212',
+        textGrayColor: '#6b7280',
+        bgDarkGrayColor: '#1E293B',
         bgColor: '#f8f9fa',
+        bgDeepBlack: '#121212',
 
         // Colores para el modo oscuro
         dark: {

@@ -20,9 +20,9 @@ export const HomePage = () => {
     <div className='bg-bgColor text-textColor dark:bg-dark-bgColor dark:text-dark-textColor transition-colors duration-300'>
       <HeroHome />
       <RecentPosts />
-      <hr className='bg-secondary dark:bg-dark-secondary m-auto mt-6 mb-6 lg:mt-10 lg:mb-10' />
+      <hr className=' m-auto mt-6 mb-6 lg:mt-10 lg:mb-10 dark:border-dark-accent/15' />
       <AllPosts />
-      <hr className='bg-secondary dark:bg-dark-secondary m-auto mt-6 mb-6 lg:mt-10 lg:mb-10' />
+      <hr className=' m-auto mt-6 mb-6 lg:mt-10 lg:mb-10 dark:border-dark-accent/15' />
     </div>
   )
 }
