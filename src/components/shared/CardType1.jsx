@@ -16,7 +16,7 @@ export const CardType1 = ({ img, title, userNickName, postCreated, description, 
   const formattedDate = formatDate(postCreated)
 
   return (
-    <div className='mb-12 mt-4 cursor-pointer' onClick={() => redirectToPost(postId)}>
+    <div className='mb-12 mt-4 cursor-pointer hover:scale-110 transition-all dark:hover:shadow-lg dark:hover:shadow-dark-accent' onClick={() => redirectToPost(postId)}>
       <div className='flex flex-col border-gray-400 border rounded-md p-4 h-[400px] dark:border-dark-accent/15 dark:border-2'>
         <img
           className='w-full object-cover mb-3 lg:aspect-video h-[150px] rounded-md'

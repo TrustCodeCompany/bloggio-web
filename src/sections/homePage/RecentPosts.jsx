@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 //   RiTwitterFill
 // } from 'react-icons/ri'
 import { MutatingDots } from 'react-loader-spinner'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { formatDate } from './../../utils/dateHelper'
 import { ENDPOINTS } from '../../api/apiEndpoints.js'
 
@@ -32,6 +32,12 @@ export const RecentPosts = () => {
     fetchData()
   }, [])
 
+  const navigate = useNavigate()
+
+  const redirectToPost = (postId) => {
+    navigate(`/detail-post/${postId}`)
+  }
+
   return (
     loading
       ? (
@@ -55,7 +61,7 @@ export const RecentPosts = () => {
           <section className='lg:flex lg:gap-3'>
             {/* card 1 */}
             {posts[0] && (
-              <div className='md:mb-6 lg:w-[50%] mb-3'>
+              <div className='md:mb-6 lg:w-[50%] mb-3 cursor-pointer transition-all dark:hover:shadow-lg dark:hover:shadow-dark-accent' onClick={() => redirectToPost(posts[0].postId)}>
                 <div className='min-h-full flex flex-col justify-between border border-slate-300 dark:border-dark-accent/15 dark:border-2 rounded-md p-3'>
                   <div>
                     <img
@@ -113,8 +119,9 @@ export const RecentPosts = () => {
             {/* cards 2,3,4 */}
             <div className='md:flex md:justify-between lg:w-[50%] lg:flex lg:flex-row flex-wrap'>
               {posts.slice(1).map((post) => (
-                <div key={post.postId} className='md:w-[32%] lg:w-full mb-6'>
-                  <div className='lg:flex lg:justify-start lg:gap-4 border border-slate-300 dark:border-dark-accent/15 dark:border-2 rounded-md p-3 lg:h-full'>
+                // md:mb-6 lg:w-[50%] mb-3 cursor-pointer transition-all dark:hover:shadow-lg dark:hover:shadow-dark-accent' onClick={() => redirectToPost(posts[0].postId)}
+                <div key={post.postId} className='md:w-[32%] lg:w-full mb-6 '>
+                  <div className='lg:flex lg:justify-start lg:gap-4 border border-slate-300 cursor-pointer transition-all dark:hover:shadow-lg dark:hover:shadow-dark-accent dark:border-dark-accent/15 dark:border-2 rounded-md p-3 lg:h-full' onClick={() => redirectToPost(posts[0].postId)}>
                     <img
                       className='w-full object-cover h-[150px] aspect-video lg:aspect-video lg:w-[25%] lg:mb-0 rounded-md'
                       src={post.postImage}
