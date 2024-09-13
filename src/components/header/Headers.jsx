@@ -7,7 +7,7 @@ export const Headers = () => {
   const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
-    if (localStorage.getItem('theme') === 'dark') {
+    if (localStorage.getItem('themeBloggio') === 'dark') {
       setDarkMode(true)
       document.documentElement.classList.add('dark')
     } else {
@@ -20,10 +20,10 @@ export const Headers = () => {
     setDarkMode(!darkMode)
     if (!darkMode) {
       document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
+      localStorage.setItem('themeBloggio', 'dark')
     } else {
       document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
+      localStorage.setItem('themeBloggio', 'light')
     }
   }
 
