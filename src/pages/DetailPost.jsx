@@ -56,7 +56,7 @@ export const DetailPost = () => {
             {parse(post.postContent)} {/* Aquí usamos html-react-parser */}
             <MenuBottomDetailPost />
           </article>
-          <section className='md:w-[30%] pt-[40rem]'>
+          <section className='md:w-[30%] md:pt-16'>
             <CommentsSection
               author={post.user.userNickname}
               category={post.categoryDesc}

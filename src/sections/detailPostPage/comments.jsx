@@ -2,7 +2,7 @@ import imgUser2 from '../../assets/images/user-female-photo.jpg'
 
 export const Comments = () => {
   return (
-    <div className='md:w-[30%] lg:w-[40%] rounded-lg mt-10 mb-10 md:mt-0'>
+    <div className='md:w-[30%] lg:w-[40%] rounded-lg mb-10 md:mt-0'>
       <h3 className='text-xl font-bold'>Comentarios</h3>
       <div className=' bg-slate-950 text-slate-300 p-4 flex gap-4 rounded-lg md:flex-col lg:flex-row'>
         <img
