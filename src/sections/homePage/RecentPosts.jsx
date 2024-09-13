@@ -121,7 +121,7 @@ export const RecentPosts = () => {
               {posts.slice(1).map((post) => (
                 // md:mb-6 lg:w-[50%] mb-3 cursor-pointer transition-all dark:hover:shadow-lg dark:hover:shadow-dark-accent' onClick={() => redirectToPost(posts[0].postId)}
                 <div key={post.postId} className='md:w-[32%] lg:w-full mb-6 '>
-                  <div className='lg:flex lg:justify-start lg:gap-4 border border-slate-300 cursor-pointer transition-all dark:hover:shadow-lg dark:hover:shadow-dark-accent dark:border-dark-accent/15 dark:border-2 rounded-md p-3 lg:h-full' onClick={() => redirectToPost(posts[0].postId)}>
+                  <div className='lg:flex lg:justify-start lg:gap-4 border border-slate-300 cursor-pointer transition-all dark:hover:shadow-lg dark:hover:shadow-dark-accent dark:border-dark-accent/15 dark:border-2 rounded-md p-3 lg:h-full' onClick={() => redirectToPost(post.postId)}>
                     <img
                       className='w-full object-cover h-[150px] aspect-video lg:aspect-video lg:w-[25%] lg:mb-0 rounded-md'
                       src={post.postImage}
